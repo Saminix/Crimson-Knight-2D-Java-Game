@@ -23,6 +23,10 @@ public class Game {
         // World world = new World();
         GameWorld world = new GameWorld();
 
+        //Shape shape = new CircleShape(1.5f);
+        //Body ball = new DynamicBody(world, shape);
+
+
 
         //3. make a view to look into the game world
         GameView view = new GameView(world, 650, 600);

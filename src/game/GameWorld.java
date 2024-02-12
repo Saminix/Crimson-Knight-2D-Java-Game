@@ -27,5 +27,7 @@ public class GameWorld extends World {
         StaticBody platform2 = new StaticBody(this, platformShape2);
         platform2.setPosition(new Vec2(3,5));
         platform2.addImage(new BodyImage("data/grassplatform.png", 6));
+
+
     }
 }
