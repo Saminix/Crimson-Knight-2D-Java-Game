@@ -23,13 +23,9 @@ public class Game {
         //1. make an empty game world
         World world = new World();
 
-        //2. populate it with bodies (ex: platforms, collectibles, characters)
+        Warrior warrior = new Warrior(world);
+        warrior.setPosition(new Vec2(7, -9));
 
-        //make a character (with an overlaid image)
-        Shape warriorShape = new BoxShape(2,4);
-        DynamicBody warrior = new DynamicBody(world, warriorShape);
-        warrior.setPosition(new Vec2(6,-12.5f));
-        warrior.addImage(new BodyImage("data/warrior.gif", 9.5f));
 
         //make a ground platform
         Shape shape = new BoxShape(30, 0.9f);
