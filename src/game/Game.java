@@ -20,44 +20,8 @@ public class Game {
     /** Initialise a new Game. */
     public Game() {
 
-        //1. make an empty game world
-        World world = new World();
-
-        Warrior warrior = new Warrior(world);
-        warrior.setPosition(new Vec2(7, -9));
-
-
-        //make a ground platform
-        Shape shape = new BoxShape(30, 0.9f);
-        //measure width and height for the block
-        StaticBody ground = new StaticBody(world, shape);
-        ground.setPosition(new Vec2(5f, -12.5f));
-        ground.addImage(new BodyImage("data/grassfloor.png", 5));
-        //y(-5.5f) = y coordinate
-        //x(0f) = x coordinate
-
-        // make a suspended platform
-        Shape platformShape1 = new BoxShape(3, 0.5f);
-        //create another block( in the air) and measure out length and height
-        StaticBody platform1 = new StaticBody(world, platformShape1);
-        // call this static block platform 1 and populate into world
-        platform1.setPosition(new Vec2(-9, -6f));
-        platform1.addImage(new BodyImage("data/grassplatform.png", 5));
-        //initialise the coordinates of the block - note this is the centre of coordinates
-
-        Shape platformShape2 = new BoxShape(3, 0.5f);
-        StaticBody platform2 = new StaticBody(world, platformShape2);
-        platform2.setPosition(new Vec2(3,5));
-        platform2.addImage(new BodyImage("data/grassplatform.png", 6));
-
-
-       
-
-
-
-
-
-
+        // World world = new World();
+        GameWorld world = new GameWorld();
 
 
         //3. make a view to look into the game world
