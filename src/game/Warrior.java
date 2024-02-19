@@ -1,8 +1,10 @@
 package game;
 import city.cs.engine.*;
 import city.cs.engine.BoxShape;
-import city.cs.engine.DynamicBody;
 import city.cs.engine.Shape;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 
 public class Warrior extends Walker {
     private static final Shape warriorShape = new BoxShape(2,4);
@@ -23,4 +25,11 @@ public class Warrior extends Walker {
     public int getPoints() {
         return points;
     }
+
+
+
+
+
+
+
 }

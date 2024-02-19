@@ -21,10 +21,15 @@ public class Game {
     public Game() {
 
         // World world = new World();
+
         GameWorld world = new GameWorld();
+        WarriorController controller = new WarriorController(world.getWarrior());
+
 
         //Shape shape = new CircleShape(1.5f);
         //Body ball = new DynamicBody(world, shape);
+
+
 
 
 
@@ -52,6 +57,7 @@ public class Game {
         // finally, make the frame visible
         frame.setVisible(true);
 
+
         //optional: uncomment this to make a debugging view
          JFrame debugView = new DebugViewer(world, 500, 500);
 
@@ -64,4 +70,7 @@ public class Game {
 
         new Game();
     }
+
+
+
 }

@@ -2,11 +2,17 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 public class GameWorld extends World {
+
+    private Warrior warrior;
     public GameWorld(){
         super();
-
-        Warrior warrior = new Warrior(this);
+        warrior = new Warrior(this);
         warrior.setPosition(new Vec2(7, -9));
+
+
+
+
+
 
 
         //make a ground platform
@@ -30,4 +36,10 @@ public class GameWorld extends World {
 
 
     }
+
+    public Warrior getWarrior(){
+        return warrior;
+    }
+
+
 }
