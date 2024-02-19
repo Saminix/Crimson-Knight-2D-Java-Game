@@ -29,12 +29,9 @@ public class Game {
         //Shape shape = new CircleShape(1.5f);
         //Body ball = new DynamicBody(world, shape);
 
-
-
-
-
         //3. make a view to look into the game world
         GameView view = new GameView(world, 650, 600);
+        view.addKeyListener(controller);
 
 
         //optional: draw a 1-metre grid over the view
@@ -63,6 +60,7 @@ public class Game {
 
         // start our game world simulation!
         world.start();
+        view.requestFocus();
     }
 
     /** Run the game. */
