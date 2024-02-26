@@ -7,7 +7,11 @@ public class GameWorld extends World {
     public GameWorld(){
         super();
         warrior = new Warrior(this);
+        //warrior.setAlwaysOutline(true);
         warrior.setPosition(new Vec2(7, -9));
+        Monster Monster = new Monster(this);
+        Monster.setPosition(new Vec2(3, 9));
+
 
 
 

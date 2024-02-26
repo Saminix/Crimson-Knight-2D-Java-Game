@@ -32,6 +32,7 @@ public class Game {
         //3. make a view to look into the game world
         GameView view = new GameView(world, 650, 600);
         view.addKeyListener(controller);
+        MouseHandler mouseHandler = new MouseHandler(world, view);
 
 
         //optional: draw a 1-metre grid over the view
@@ -58,9 +59,14 @@ public class Game {
         //optional: uncomment this to make a debugging view
          JFrame debugView = new DebugViewer(world, 500, 500);
 
+        GiveFocus giveFocus = new GiveFocus();
+        view.addMouseListener(giveFocus);
+        view.addMouseListener(mouseHandler);
+
         // start our game world simulation!
         world.start();
         view.requestFocus();
+
     }
 
     /** Run the game. */
