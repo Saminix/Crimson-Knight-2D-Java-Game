@@ -9,13 +9,16 @@ public class GameWorld extends World {
         warrior = new Warrior(this);
         //warrior.setAlwaysOutline(true);
         warrior.setPosition(new Vec2(7, -9));
+        CoinPickup pickup = new CoinPickup(warrior);
+        warrior.addCollisionListener(pickup);
         Monster Monster = new Monster(this);
         Monster.setPosition(new Vec2(3, 9));
 
 
-
-
-
+        new Coins(this).setPosition(new Vec2(-9.5f,-4f));
+        new Coins(this).setPosition(new Vec2(-11.5f,-4f));
+        new Coins(this).setPosition(new Vec2(8,7));
+        new Coins(this).setPosition(new Vec2(10,7));
 
 
 
@@ -24,6 +27,8 @@ public class GameWorld extends World {
         StaticBody ground = new StaticBody(this, shape);
         ground.setPosition(new Vec2(5f, -12.5f));
         ground.addImage(new BodyImage("data/grassfloor.png", 5));
+
+
 
 
         // make a suspended platform
@@ -37,6 +42,8 @@ public class GameWorld extends World {
         StaticBody platform2 = new StaticBody(this, platformShape2);
         platform2.setPosition(new Vec2(3,5));
         platform2.addImage(new BodyImage("data/grassplatform.png", 6));
+
+
 
 
     }
