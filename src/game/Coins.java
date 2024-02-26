@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import city.cs.engine.DynamicBody;
 
-public class Coins extends DynamicBody {
+public class Coins extends StaticBody {
     private static final Shape coinsShape = new CircleShape(1);
 
-    private static final BodyImage image = new BodyImage("data/Coins.gif", 2f);
+    private static final BodyImage image = new BodyImage("data/Coin.gif", 4f);
 
 
     public Coins(World w){
