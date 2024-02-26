@@ -13,6 +13,7 @@ public class WarriorController implements KeyListener {
         this.warrior = warrior;
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -21,16 +22,35 @@ public class WarriorController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        if (code == KeyEvent.VK_1) {
+        if (code == KeyEvent.VK_A) {
             warrior.startWalking(-5);
-        } else if (code == KeyEvent.VK_2) {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/WarriorLeft.gif", 9.5f));
+
+        } else if (code == KeyEvent.VK_D) {
             warrior.startWalking(5);
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/warrior.gif", 9.5f));
+
+        } else if ( code == KeyEvent.VK_W){
+            warrior.jump(12);
         }
+
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        int code = e.getKeyCode();
+        if ( code == KeyEvent.VK_A) {
+            warrior.stopWalking();
+        } else if ( code == KeyEvent.VK_D){
+            warrior.stopWalking();
+        }
+
 
     }
+
+
+
 }
