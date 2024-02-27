@@ -16,6 +16,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Game {
 
+    private GameWorld world;
+
+    /** A graphical display of the world (a specialised JPanel). */
+    private GameView view;
+
+    private SoundClip gameMusic;
+
 
     /** Initialise a new Game. */
     public Game() {
@@ -23,16 +30,22 @@ public class Game {
         // World world = new World();
 
         GameWorld world = new GameWorld();
-        WarriorController controller = new WarriorController(world.getWarrior());
+
 
 
         //Shape shape = new CircleShape(1.5f);
         //Body ball = new DynamicBody(world, shape);
 
         //3. make a view to look into the game world
-        GameView view = new GameView(world, 650, 600);
+        GameView view = new GameView(world, 850, 850);
+        WarriorController controller = new WarriorController(world.getWarrior());
         view.addKeyListener(controller);
-        MouseHandler mouseHandler = new MouseHandler(world, view);
+        view.addKeyListener(controller);
+
+        view.addMouseListener(new GiveFocus(view));
+
+        //world.addStepListener(new Tracker(view, world.getWarrior()));
+
 
 
         //optional: draw a 1-metre grid over the view
@@ -57,11 +70,9 @@ public class Game {
 
 
         //optional: uncomment this to make a debugging view
-         JFrame debugView = new DebugViewer(world, 500, 500);
+        JFrame debugView = new DebugViewer(world, 500, 500);
 
-        GiveFocus giveFocus = new GiveFocus();
-        view.addMouseListener(giveFocus);
-        view.addMouseListener(mouseHandler);
+
 
         // start our game world simulation!
         world.start();

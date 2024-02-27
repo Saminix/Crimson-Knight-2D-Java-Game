@@ -1,4 +1,5 @@
 package game;
+
 import city.cs.engine.*;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -6,14 +7,16 @@ import java.io.IOException;
 
 import city.cs.engine.DynamicBody;
 
-public class Coins extends StaticBody {
-    private static final Shape coinsShape = new CircleShape(1);
+public class Trap extends StaticBody{
+    private static final Shape trapShape = new CircleShape(1);
 
-    private static final BodyImage image = new BodyImage("data/Coin.gif", 5f);
+    private static final BodyImage image = new BodyImage("data/obstacle1.gif", 6f);
 
 
-    public Coins(World world){
-        super(world, coinsShape);
+    public Trap(World world){
+        super(world, trapShape);
         addImage(image);
     }
 }
+
+
