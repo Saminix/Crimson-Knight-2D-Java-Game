@@ -1,7 +1,9 @@
 package game;
 
+import city.cs.engine.BodyImage;
 import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
+
 
 public class WarriorCollisions implements CollisionListener {
     private Warrior warrior;
@@ -12,7 +14,10 @@ public class WarriorCollisions implements CollisionListener {
     @Override
     public void collide( CollisionEvent e) {
         if (e.getOtherBody() instanceof Trap){
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/warriorHurt.gif", 10.5f));
             warrior.setHealth(warrior.getHealth() - 5);
+
         }
     }
 }

@@ -18,6 +18,9 @@ public class GameWorld extends World {
         CoinPickup pickup = new CoinPickup(warrior);
         warrior.addCollisionListener(pickup);
 
+        WarriorCollisions trap = new WarriorCollisions(warrior);
+        warrior.addCollisionListener(trap);
+
         // Create the ground
         Shape groundShape = new BoxShape(80, 2f); // Set the hape of the ground
         StaticBody ground = new StaticBody(this, groundShape);
@@ -32,7 +35,7 @@ public class GameWorld extends World {
 
         Shape platformShape2 = new BoxShape(10, 1.5f);
         StaticBody platform2 = new StaticBody(this, platformShape2);
-        platform2.setPosition(new Vec2(7.5f, 3.5f));
+        platform2.setPosition(new Vec2(7.5f, 5.5f));
         platform2.addImage(new BodyImage("data/grassplatform.png", 6));
 
         Shape platformShape3 = new BoxShape(12.5f, 1.5f);
@@ -45,8 +48,8 @@ public class GameWorld extends World {
         monster.setPosition(new Vec2(3, 8));
 
         // Add coins
-        new Coins(this).setPosition(new Vec2(-9.5f,-3f));
-        new Coins(this).setPosition(new Vec2(-11.5f,-3f));
+        new Coins(this).setPosition(new Vec2(-13.5f,-3f));
+        new Coins(this).setPosition(new Vec2(-15.5f,-3f));
         new Coins(this).setPosition(new Vec2(12,8));
         new Coins(this).setPosition(new Vec2(14,8));
 
