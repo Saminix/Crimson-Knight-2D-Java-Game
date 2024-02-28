@@ -1,12 +1,9 @@
 package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
-import city.cs.engine.*;
-import org.jbox2d.common.Vec2;
-
 public class GameWorld extends World {
 
-    private Warrior warrior;
+    private final Warrior warrior;
 
     public GameWorld(){
         super();
@@ -15,14 +12,14 @@ public class GameWorld extends World {
         warrior.setPosition(new Vec2(7, -9)); // Set initial position of the warrior
 
         // Add collision listener for coin pickups
-        CoinPickup pickup = new CoinPickup(warrior);
+        WarriorPickup pickup = new WarriorPickup(warrior);
         warrior.addCollisionListener(pickup);
 
         WarriorCollisions trap = new WarriorCollisions(warrior);
         warrior.addCollisionListener(trap);
 
         // Create the ground
-        Shape groundShape = new BoxShape(80, 2f); // Set the hape of the ground
+        Shape groundShape = new BoxShape(80, 2f); // Set the shape of the ground
         StaticBody ground = new StaticBody(this, groundShape);
         ground.setPosition(new Vec2(0f, -19.5f)); // Set position of the ground
         ground.addImage(new BodyImage("data/grassfloor.png", 5)); // Add image to the ground
