@@ -54,6 +54,7 @@ public class GameView extends UserView {
 
     }
 
+    //creating a coin count and symbol
     private void drawCoinCount(Graphics2D g){
         int CoinCount = warrior.getCoins();
         coinsimage = new ImageIcon("data/Coin.gif").getImage();
@@ -70,6 +71,8 @@ public class GameView extends UserView {
 
 
     }
+
+    //creating a score count and symbol
 
     private void drawScoreCount(Graphics2D g){
         int ScoreCount = warrior.getScore();
