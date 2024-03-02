@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
 
 public class Tracker implements StepListener {
     private GameView view;
-    private Warrior warrior;
+    private final Warrior warrior;
 
     public Tracker(GameView view, Warrior warrior){
         this.warrior = warrior;
