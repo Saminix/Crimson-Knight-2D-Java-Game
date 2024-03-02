@@ -29,7 +29,6 @@ public class Game {
 
         // World world = new World();
 
-        GameWorld world = new GameWorld();
 
 
 
@@ -37,19 +36,18 @@ public class Game {
         //Body ball = new DynamicBody(world, shape);
 
         //3. make a view to look into the game world
-        GameView view = new GameView(world, 850, 850);
+        GameWorld world = new GameWorld();
+        view = new GameView(world, 800, 700);
         WarriorController controller = new WarriorController(world.getWarrior());
         view.addKeyListener(controller);
         view.addKeyListener(controller);
-
         view.addMouseListener(new GiveFocus(view));
-
-        //world.addStepListener(new Tracker(view, world.getWarrior()));
-
-
-
+        //make the view continue - over out of scope
+        world.addStepListener(new Tracker(view, world.getWarrior()));
+        view.setCentre(world.getWarrior().getPosition());
         //optional: draw a 1-metre grid over the view
-         view.setGridResolution(1);
+        // view.setGridResolution(1);
+
 
 
         //4. create a Java window (frame) and add the game
@@ -70,7 +68,7 @@ public class Game {
 
 
         //optional: uncomment this to make a debugging view
-        JFrame debugView = new DebugViewer(world, 500, 500);
+        JFrame debugView = new DebugViewer(world, 850, 700);
 
 
 

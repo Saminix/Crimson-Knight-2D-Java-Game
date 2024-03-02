@@ -1,12 +1,9 @@
 package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
-import city.cs.engine.*;
-import org.jbox2d.common.Vec2;
-
 public class GameWorld extends World {
 
-    private Warrior warrior;
+    private final Warrior warrior;
 
     public GameWorld(){
         super();
@@ -15,33 +12,33 @@ public class GameWorld extends World {
         warrior.setPosition(new Vec2(7, -9)); // Set initial position of the warrior
 
         // Add collision listener for coin pickups
-        CoinPickup pickup = new CoinPickup(warrior);
+        WarriorPickup pickup = new WarriorPickup(warrior);
         warrior.addCollisionListener(pickup);
 
         WarriorCollisions trap = new WarriorCollisions(warrior);
         warrior.addCollisionListener(trap);
 
         // Create the ground
-        Shape groundShape = new BoxShape(80, 2f); // Set the hape of the ground
+        Shape groundShape = new BoxShape(80, 2f); // Set the shape of the ground
         StaticBody ground = new StaticBody(this, groundShape);
-        ground.setPosition(new Vec2(0f, -19.5f)); // Set position of the ground
-        ground.addImage(new BodyImage("data/grassfloor.png", 5)); // Add image to the ground
+        ground.setPosition(new Vec2(0f, -23.5f)); // Set position of the ground
+        ground.addImage(new BodyImage("data/grassfloor.png", 7)); // Add image to the ground
 
         // Make a suspended platform
-        Shape platformShape1 = new BoxShape(12, 1.5f);
+        Shape platformShape1 = new BoxShape(11.5f, 1f);
         StaticBody platform1 = new StaticBody(this, platformShape1);
         platform1.setPosition(new Vec2(-9, -6f));
         platform1.addImage(new BodyImage("data/grassplatform.png", 6));
 
-        Shape platformShape2 = new BoxShape(10, 1.5f);
+        Shape platformShape2 = new BoxShape(11.5f, 1f);
         StaticBody platform2 = new StaticBody(this, platformShape2);
         platform2.setPosition(new Vec2(7.5f, 5.5f));
         platform2.addImage(new BodyImage("data/grassplatform.png", 6));
 
-        Shape platformShape3 = new BoxShape(12.5f, 1.5f);
+        Shape platformShape3 = new BoxShape(12.5f, 1f);
         StaticBody platform3 = new StaticBody(this, platformShape3);
-        platform3.setPosition(new Vec2(21.5f, -11.5f));
-        platform3.addImage(new BodyImage("data/grassplatform.png", 5));
+        platform3.setPosition(new Vec2(23.5f, -13.5f));
+        platform3.addImage(new BodyImage("data/grassplatform.png", 6f));
 
         // Add the monster
         Monster monster = new Monster(this);
