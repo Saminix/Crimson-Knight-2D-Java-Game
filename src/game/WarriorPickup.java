@@ -16,7 +16,7 @@ public class WarriorPickup implements CollisionListener {
             warrior.setCoins(warrior.getCoins() + 1);
             e.getOtherBody().destroy();
         } else if (e.getOtherBody() instanceof Point) {
-            warrior.setScore(warrior.getScore() + 1);
+            warrior.setScore(warrior.getScore() + 10);
             e.getOtherBody().destroy();
         }
     }

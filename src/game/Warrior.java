@@ -28,7 +28,7 @@ public class Warrior extends Walker {
 
     }
 
-    public void setCoins(int points){
+    public void setCoins(int coins){
         this.coins = coins;
     }
 
