@@ -7,9 +7,9 @@ import java.io.IOException;
 import city.cs.engine.DynamicBody;
 
 public class Coins extends StaticBody {
-    private static final Shape coinsShape = new CircleShape(1);
+    private static final Shape coinsShape = new CircleShape(1.3f);
 
-    private static final BodyImage image = new BodyImage("data/Coin.gif", 5f);
+    private static final BodyImage image = new BodyImage("data/Coin.gif", 6f);
 
 
     public Coins(World world){
