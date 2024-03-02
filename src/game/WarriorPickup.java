@@ -6,12 +6,17 @@ import city.cs.engine.CollisionEvent;
 public class WarriorPickup implements CollisionListener {
     private Warrior warrior;
 
-    public WarriorPickup(Warrior warrior) { this.warrior = warrior; }
+    public WarriorPickup(Warrior warrior) {
+        this.warrior = warrior;
+    }
 
     @Override
-    public void collide( CollisionEvent e){
-        if( e.getOtherBody() instanceof Coins){
-            warrior.setCoins(warrior.getCoins()+ 1);
+    public void collide(CollisionEvent e) {
+        if (e.getOtherBody() instanceof Coins) {
+            warrior.setCoins(warrior.getCoins() + 1);
+            e.getOtherBody().destroy();
+        } else if (e.getOtherBody() instanceof Point) {
+            warrior.setScore(warrior.getScore() + 1);
             e.getOtherBody().destroy();
         }
     }
