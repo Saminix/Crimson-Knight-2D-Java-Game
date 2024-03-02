@@ -15,9 +15,15 @@ public class WarriorCollisions implements CollisionListener {
     public void collide( CollisionEvent e) {
         if (e.getOtherBody() instanceof Trap){
             warrior.removeAllImages();
-            warrior.addImage(new BodyImage("data/warriorHurt.gif", 10.5f));
+            warrior.addImage(new BodyImage("data/HoodedCharacter/WarriorHurt.gif", 7.5f));
             warrior.setHealth(warrior.getHealth() - 5);
-
+        }else if (e.getOtherBody() instanceof Monster) {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/WarriorHurt.gif", 7.5f));
+            warrior.setHealth(warrior.getHealth() - 15);
         }
+
+
+
     }
 }
