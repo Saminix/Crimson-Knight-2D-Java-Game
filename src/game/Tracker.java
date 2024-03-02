@@ -20,7 +20,11 @@ public class Tracker implements StepListener {
 
     public void preStep(StepEvent e) {}
     public void postStep(StepEvent e) {
-        view.setCentre(warrior.getPosition());
+        Vec2 currentCentre = view.getCentre();
+        //setting position of the camera view with the x-coordinate of the warrior and y of camera view.
+        Vec2 newCentre = new Vec2(warrior.getPosition().x,currentCentre.y);
+
+        view.setCentre(newCentre);
     }
 
 }
