@@ -3,10 +3,10 @@ package game;
 import city.cs.engine.CollisionListener;
 import city.cs.engine.CollisionEvent;
 
-public class CoinPickup implements CollisionListener {
+public class WarriorPickup implements CollisionListener {
     private Warrior warrior;
 
-    public CoinPickup(Warrior warrior) { this.warrior = warrior; }
+    public WarriorPickup(Warrior warrior) { this.warrior = warrior; }
 
     @Override
     public void collide( CollisionEvent e){
