@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -50,11 +51,15 @@ public class Game {
 
 
 
+
+
+
+
+
         //4. create a Java window (frame) and add the game
         //   view to it
         final JFrame frame = new JFrame("City Game");
         frame.add(view);
-
         // enable the frame to quit the application
         // when the x button is pressed
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

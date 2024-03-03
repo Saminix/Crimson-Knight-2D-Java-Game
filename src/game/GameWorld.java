@@ -1,9 +1,15 @@
 package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
+
+import java.util.ArrayList;
+
 public class GameWorld extends World {
 
     private final Warrior warrior;
+
+
+    private Point pointOrb;
 
     public GameWorld(){
         super();
@@ -54,7 +60,28 @@ public class GameWorld extends World {
         new Trap(this).setPosition(new Vec2(-6, -3.4f));
     }
 
+
+
     public Warrior getWarrior(){
         return warrior;
+    }
+
+    public void  addPoint(Point pointOrb){
+        this.addPoint(pointOrb);
+    }
+
+
+    //make an arraylist of the amount of enemies populated in the world
+    public static ArrayList<Enemy> getEnemies(){
+        ArrayList<Enemy> enemyList = new ArrayList<>();
+        World world = new World();
+        for (Object body: world.getDynamicBodies()){
+            if (body instanceof Enemy){
+                enemyList.add((Enemy)body);
+            }
+        }
+        return enemyList;
+
+
     }
 }

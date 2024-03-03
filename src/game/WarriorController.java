@@ -5,12 +5,17 @@ import city.cs.engine.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class WarriorController implements KeyListener {
     private Warrior warrior;
     private static final int walkSpeed = 10;
-    private static final int jumpSpeed = 13;
+    private static final int jumpSpeed = 12;
     private static final float imageScale = 7.5f;
+
+    private World world;
+
+    private Enemy enemy;
 
     private boolean isFacingRight = false;
 
@@ -20,7 +25,10 @@ public class WarriorController implements KeyListener {
 
 
     public WarriorController(Warrior warrior) {
+
         this.warrior = warrior;
+        this.world = world;
+        this.enemy = enemy;
     }
 
 
@@ -55,17 +63,8 @@ public class WarriorController implements KeyListener {
             }
 
 
-
-
-
         }else if ( code == KeyEvent.VK_M  ){
-            if ( isFacingRight ){
-                warrior.removeAllImages();
-                warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHit.gif", imageScale));
-            }else {
-                warrior.removeAllImages();
-                warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHitLeft.gif", imageScale));
-            }
+            attack();
 
         }
 
@@ -78,10 +77,8 @@ public class WarriorController implements KeyListener {
         if ( code == KeyEvent.VK_A || code == KeyEvent.VK_D) {
             warrior.stopWalking();
         } else if ( code == KeyEvent.VK_M ){
-            warrior.removeAllImages();
             setWarriorToStop();
         } else if (code == KeyEvent.VK_W) {
-            warrior.removeAllImages();
             setWarriorToStop();
 
         }
@@ -90,8 +87,8 @@ public class WarriorController implements KeyListener {
     }
 
 
-
     // method to position which direction the warrior stops in.
+
     private void setWarriorToStop(){
         warrior.removeAllImages();
         if (isFacingRight) {
@@ -105,9 +102,32 @@ public class WarriorController implements KeyListener {
 
 
 
+    private void attack() {
+        if (isFacingRight) {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHit.gif", imageScale));
+        } else {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHitLeft.gif", imageScale));
+        }
+
+        // Accessing enemies from the world
+        // foreach loop.
+
+        GameWorld gameWorld = new GameWorld();
+        ArrayList<Enemy> enemies = GameWorld.getEnemies();
+
+        for (Enemy enemy: enemies){
+            if (enemy instanceof Monster){
+                ((Monster) enemy).decrementHealth(20);
+
+            }
+        }
+
+
+        }
+    }
 
 
 
 
-
-}
