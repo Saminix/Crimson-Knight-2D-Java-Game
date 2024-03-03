@@ -35,6 +35,31 @@ public class Monster extends Enemy {
 
     }
 
+    @Override
+    public void getEnemies(){
+
+    }
+
+    @Override
+    public int getHealth(){
+        return EnemyHealth;
+    }
+
+    @Override
+    public int decrementHealth(int x){
+       EnemyHealth = EnemyHealth - x;
+        return EnemyHealth;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

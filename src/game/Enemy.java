@@ -20,5 +20,10 @@ public abstract class Enemy extends Walker {
 
     public abstract void destory();
 
+    public abstract int getHealth();
 
+
+    public abstract void getEnemies();
+
+    public abstract int decrementHealth(int x);
 }
