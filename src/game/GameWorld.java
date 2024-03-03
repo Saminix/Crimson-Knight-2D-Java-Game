@@ -41,7 +41,7 @@ public class GameWorld extends World {
         platform3.addImage(new BodyImage("data/grassplatform.png", 6f));
 
         // Add the monster
-        Monster monster = new Monster(this);
+        Monster monster = new Monster(this,60,12);
         monster.setPosition(new Vec2(3, 8));
 
         // Add coins
