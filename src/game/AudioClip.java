@@ -5,16 +5,21 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public class AudioClip extends Object {
-    private static AudioClip audioClip;
+    private static SoundClip soundClip;
 
 
     public AudioClip(String fileName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        audioClip = new AudioClip(fileName);
+        soundClip = new SoundClip(fileName);
     }
 
 
     public void play(){
-        audioClip.play();
+        soundClip.play();
+
+    }
+
+    public void stop(){
+        soundClip.stop();
 
     }
 
