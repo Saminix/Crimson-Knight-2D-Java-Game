@@ -16,4 +16,9 @@ public abstract class Enemy extends Walker {
     public abstract void attack();
 
     public abstract void movement();
+
+
+    public abstract void destory();
+
+
 }
