@@ -3,8 +3,9 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
+import game.GameView;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -37,9 +38,9 @@ public class Game {
         //Body ball = new DynamicBody(world, shape);
 
         //3. make a view to look into the game world
-        GameWorld world = new GameWorld();
+        world = new GameWorld();
         view = new GameView(world, 800, 700);
-        WarriorController controller = new WarriorController(world.getWarrior());
+        WarriorController controller = new WarriorController(world.getWarrior(), new GameWorld());
         view.addKeyListener(controller);
         view.addKeyListener(controller);
         view.addMouseListener(new GiveFocus(view));
@@ -77,6 +78,9 @@ public class Game {
 
 
 
+
+
+
         // start our game world simulation!
         world.start();
         view.requestFocus();
@@ -88,6 +92,8 @@ public class Game {
 
         new Game();
     }
+
+
 
 
 
