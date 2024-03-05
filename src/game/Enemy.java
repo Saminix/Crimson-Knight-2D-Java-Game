@@ -13,14 +13,22 @@ public abstract class Enemy extends Walker {
     }
 
 
-    public abstract void attack();
+    public abstract void chaseWarrior(Warrior warrior);
+
+
 
     public abstract void movement();
 
 
-    public abstract void destory();
+    //public abstract void destroyBuild();
 
     public abstract int getHealth();
+
+
+
+    public void TakenHit(){
+
+    }
 
 
     public abstract void getEnemies();

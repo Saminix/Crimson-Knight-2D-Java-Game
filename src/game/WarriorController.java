@@ -2,6 +2,10 @@ package game;
 
 import game.Warrior;
 import city.cs.engine.*;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,21 +17,21 @@ public class WarriorController implements KeyListener {
     private static final int jumpSpeed = 12;
     private static final float imageScale = 7.5f;
 
-    private World world;
+    private GameWorld gameworld;
 
     private Enemy enemy;
+
+    private boolean isAttacking = false;
 
     private boolean isFacingRight = false;
 
     // in order to allow the player to move the character in the direction it is facing, to jump or run etc
 
 
-
-
-    public WarriorController(Warrior warrior) {
+    public WarriorController(Warrior warrior, GameWorld gameworld) {
 
         this.warrior = warrior;
-        this.world = world;
+        this.gameworld = gameworld;
         this.enemy = enemy;
     }
 
@@ -52,18 +56,19 @@ public class WarriorController implements KeyListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUN.gif", imageScale));
             isFacingRight = true;
 
-        } else if ( code == KeyEvent.VK_W  ){
+        } else if (code == KeyEvent.VK_W) {
             warrior.jump(jumpSpeed);
-            if ( isFacingRight ){
+            if (isFacingRight) {
                 warrior.removeAllImages();
-                warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJump.gif", imageScale-1));
-            }else {
+                warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJump.gif", imageScale - 1));
+            } else {
                 warrior.removeAllImages();
-                warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJumpLeft.gif", imageScale-1));
+                warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJumpLeft.gif", imageScale - 1));
             }
 
 
-        }else if ( code == KeyEvent.VK_M  ){
+        } else if (code == KeyEvent.VK_M) {
+            isAttacking = true;
             attack();
 
         }
@@ -74,9 +79,9 @@ public class WarriorController implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-        if ( code == KeyEvent.VK_A || code == KeyEvent.VK_D) {
+        if (code == KeyEvent.VK_A || code == KeyEvent.VK_D) {
             warrior.stopWalking();
-        } else if ( code == KeyEvent.VK_M ){
+        } else if (code == KeyEvent.VK_M) {
             setWarriorToStop();
         } else if (code == KeyEvent.VK_W) {
             setWarriorToStop();
@@ -89,7 +94,8 @@ public class WarriorController implements KeyListener {
 
     // method to position which direction the warrior stops in.
 
-    private void setWarriorToStop(){
+    private void setWarriorToStop() {
+
         warrior.removeAllImages();
         if (isFacingRight) {
             warrior.removeAllImages();
@@ -101,8 +107,8 @@ public class WarriorController implements KeyListener {
     }
 
 
-
     private void attack() {
+
         if (isFacingRight) {
             warrior.removeAllImages();
             warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHit.gif", imageScale));
@@ -111,22 +117,35 @@ public class WarriorController implements KeyListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHitLeft.gif", imageScale));
         }
 
+        //try {
+        //AudioClip swordslash = new AudioClip("data/Audio/swordSlash.wav");
+        //swordslash.play();
+        //} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+
+        //e.printStackTrace();
+        // }
         // Accessing enemies from the world
         // foreach loop.
 
-        GameWorld gameWorld = new GameWorld();
-        ArrayList<Enemy> enemies = GameWorld.getEnemies();
+        Monster monster = gameworld.getMonster();
+        if (monster != null) {
+            // Attack the monster
+            warrior.attack(monster);
+        }
+            //if the monster object obtained from the gameworld is not null.check for nullpointer exceptions
 
-        for (Enemy enemy: enemies){
-            if (enemy instanceof Monster){
-                ((Monster) enemy).decrementHealth(20);
-
-            }
         }
 
 
-        }
     }
+
+
+
+
+
+
+
+
 
 
 
