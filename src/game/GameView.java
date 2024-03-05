@@ -8,9 +8,13 @@ import java.awt.*;
 
 public class GameView extends UserView {
     private Image background;
+
+    private Game game;
     private Image coinsimage;
     private Image pointimage;
     private Warrior warrior;
+
+    private Boolean gameOver;
 
 
 
@@ -18,10 +22,18 @@ public class GameView extends UserView {
         super(world, width, height);
         background = new ImageIcon("data/forestbac.jpg").getImage();
         this.warrior = world.getWarrior();
+        this.game = game;
+
+        gameOver = false;
 
 
 
     }
+
+
+
+
+
 
     @Override
     protected void paintForeground(Graphics2D g) {
@@ -29,7 +41,17 @@ public class GameView extends UserView {
         drawHealthBar(g);
         drawCoinCount(g);
         drawScoreCount(g);
+
+
+
+
     }
+
+
+
+
+
+
 
 //creating statistic
     private void drawHealthBar(Graphics2D g){
@@ -53,6 +75,13 @@ public class GameView extends UserView {
         g.drawRect(x ,y, healthBarWidth, healthBarHeight);
 
     }
+
+
+
+
+
+
+
 
     //creating a coin count and symbol
     private void drawCoinCount(Graphics2D g){

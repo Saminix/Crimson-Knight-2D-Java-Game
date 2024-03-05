@@ -2,8 +2,13 @@ package game;
 import city.cs.engine.*;
 import city.cs.engine.BoxShape;
 import city.cs.engine.Shape;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
+
+
 
 
 public class Warrior extends Walker {
@@ -13,6 +18,9 @@ public class Warrior extends Walker {
     private int coins = 0;
     private int score = 0;
 
+
+    private GameView view;
+
     private int health;
 
     private int coinCount;
@@ -20,6 +28,8 @@ public class Warrior extends Walker {
     public Warrior(World world){
         super(world, warriorShape);
         this.addImage(image);
+
+        this.view = view;
 
         this.coins = 0;
         this.score = 0;
@@ -39,6 +49,15 @@ public class Warrior extends Walker {
 
     public void setHealth( int health){
         this.health = health;
+        if ( this.health <= 0){
+            this.destroy();
+            JOptionPane.showMessageDialog(null, "GAME OVER!");
+           
+
+        }else {
+
+        }
+
     }
 
     public int getHealth() {
@@ -46,6 +65,16 @@ public class Warrior extends Walker {
     }
 
     public void setScore(int score){ this.score = score;}
+
+    public void attack(Monster monster) {
+        int damage = 10; // or whatever value you want
+        monster.TakenHit();
+    }
+
+
+
+
+
 
 
     public int getScore() {
