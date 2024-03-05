@@ -10,11 +10,14 @@ import city.cs.engine.DynamicBody;
 public class Trap extends StaticBody{
     private static final Shape trapShape = new CircleShape(1.6f);
 
-    private static final BodyImage image = new BodyImage("data/obstacle1.gif", 6.4f);
+    private BodyImage image;
 
 
-    public Trap(World world){
+
+
+    public Trap(World world, String imagePath, float height){
         super(world, trapShape);
+        image = new BodyImage(imagePath, height);
         addImage(image);
     }
 }
