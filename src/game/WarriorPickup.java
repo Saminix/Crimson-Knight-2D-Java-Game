@@ -6,8 +6,11 @@ import city.cs.engine.CollisionEvent;
 public class WarriorPickup implements CollisionListener {
     private Warrior warrior;
 
-    public WarriorPickup(Warrior warrior) {
+    private Treasure treasure;
+
+    public WarriorPickup(Warrior warrior, Treasure treasure) {
         this.warrior = warrior;
+        this.treasure = treasure;
     }
 
     @Override
@@ -17,6 +20,10 @@ public class WarriorPickup implements CollisionListener {
             e.getOtherBody().destroy();
         } else if (e.getOtherBody() instanceof Point) {
             warrior.setScore(warrior.getScore() + 10);
+            e.getOtherBody().destroy();
+        } else if (e.getOtherBody() instanceof Treasure){
+            int collectedTreasure = ((Treasure) e.getOtherBody()).CollectTreasure();
+            warrior.setCoins(warrior.getCoins() + collectedTreasure);
             e.getOtherBody().destroy();
         }
     }
