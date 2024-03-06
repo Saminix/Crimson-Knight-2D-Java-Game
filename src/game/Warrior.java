@@ -1,11 +1,6 @@
 package game;
 import city.cs.engine.*;
-import city.cs.engine.BoxShape;
 import city.cs.engine.Shape;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 
 
@@ -15,21 +10,18 @@ public class Warrior extends Walker {
     private static final Shape warriorShape = new PolygonShape(-1.12f,-2.55f, 0.76f,-2.57f, 1.52f,-0.28f, 1.35f,1.93f, -0.9f,2.33f, -1.47f,0.14f, -1.22f,-2.28f);
     private static final BodyImage image = new BodyImage("data/HoodedCharacter/HWarriorStop.gif", 7.5f);
 
-    private int coins = 0;
-    private int score = 0;
+    private int coins;
+    private int score;
 
-
-    private GameView view;
+    //private GameView view;
 
     private int health;
-
-    private int coinCount;
 
     public Warrior(World world){
         super(world, warriorShape);
         this.addImage(image);
 
-        this.view = view;
+        //this.view = view;
 
         this.coins = 0;
         this.score = 0;
@@ -52,10 +44,6 @@ public class Warrior extends Walker {
         if ( this.health <= 0){
             this.destroy();
             JOptionPane.showMessageDialog(null, "GAME OVER!");
-           
-
-        }else {
-
         }
 
     }
@@ -66,25 +54,16 @@ public class Warrior extends Walker {
 
     public void setScore(int score){ this.score = score;}
 
-    public void attack(Monster monster) {
+    public void attack(Enemy enemy) {
         int damage = 10; // or whatever value you want
-        monster.TakenHit();
+        enemy.TakenHit(damage);
     }
-
-
-
-
-
 
 
     public int getScore() {
         return score;
     }
 
-    public void setCoinCount( int coinCount){
-        this.coinCount = coinCount;
 
-        System.out.println("Becoming richer: Coins = " + coinCount);
-    }
 
 }
