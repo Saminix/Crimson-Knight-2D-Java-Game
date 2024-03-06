@@ -30,7 +30,7 @@ public class Monster extends Enemy {
 
     @Override
     public void TakenHit(int damage){
-        super.TakenHit(damage);
+        decrementHealth(damage);
         if (getHealth() <= 0) {
             destroy();
             Point point = new Point(world);

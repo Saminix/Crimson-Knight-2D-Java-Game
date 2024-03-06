@@ -5,9 +5,11 @@ import org.jbox2d.common.Vec2;
 import java.util.ArrayList;
 
 
+
 public class GameWorld extends World {
 
     private final Warrior warrior;
+    private Treasure treasure;
     private Monster monster;
 
     private Trampoline trampoline;
@@ -28,11 +30,12 @@ public class GameWorld extends World {
         warrior.setPosition(new Vec2(7, -9)); // Set initial position of the warrior
 
         // Add collision listener for coin pickups
-        WarriorPickup pickup = new WarriorPickup(warrior);
+        WarriorPickup pickup = new WarriorPickup(warrior, treasure);
         warrior.addCollisionListener(pickup);
 
         WarriorCollisions trap = new WarriorCollisions(warrior);
         warrior.addCollisionListener(trap);
+
 
         Monster monster = new Monster(this,30,12,this);
         monster.setPosition(new Vec2(-5, -9f));
@@ -41,7 +44,7 @@ public class GameWorld extends World {
 
 
         Vec2 batPosition = new Vec2(50, 2f);
-        bat = new Bat(this,batPosition,60,12,this);
+        bat = new Bat(this,batPosition,30,12,this);
 
         //Bat bat = new Bat(this,40,12,this);
         //bat.setPosition(new Vec2(40, 2f));
@@ -125,6 +128,8 @@ public class GameWorld extends World {
         new Coins(this).setPosition(new Vec2(59f,-10f));
         new Coins(this).setPosition(new Vec2(61f,-10f));
 
+        new Treasure(this).setPosition(new Vec2(50f,-10));
+
 
 
         Trap turtle = new Trap(this, "data/obstacle1.gif", 7);
@@ -138,6 +143,10 @@ public class GameWorld extends World {
 
     public Warrior getWarrior(){
         return warrior;
+    }
+
+    public Treasure getTreasure(){
+        return treasure;
     }
 
     public Monster getMonster() {
@@ -154,24 +163,24 @@ public class GameWorld extends World {
     }
 
 
-    public void setMonsterChase() {
 
-    }
 
     public Bat getBat() {
         return bat;
     }
 
-    public void removeBat() {
-        // Remove bat from the world
-        bat.destroy();
-        // Set bat reference to null
-        bat = null;
+
+
+
+    public ArrayList<Monster> getMonsters() {
+        ArrayList<Monster> monsterList = new ArrayList<>();
+        for (Object body : this.getDynamicBodies()) {
+            if (body instanceof Monster) {
+                monsterList.add((Monster) body);
+            }
+        }
+        return monsterList;
     }
-
-
-
-
 
 
     //make an arraylist of the amount of enemies populated in the world

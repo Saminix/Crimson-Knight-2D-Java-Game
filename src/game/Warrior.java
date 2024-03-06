@@ -13,6 +13,7 @@ public class Warrior extends Walker {
     private int coins;
     private int score;
 
+
     //private GameView view;
 
     private int health;
@@ -26,6 +27,7 @@ public class Warrior extends Walker {
         this.coins = 0;
         this.score = 0;
         this.health = 100;
+        Shape warriorShape1 = this.warriorShape;
 
 
     }
@@ -63,6 +65,10 @@ public class Warrior extends Walker {
     public int getScore() {
         return score;
     }
+
+
+
+
 
 
 

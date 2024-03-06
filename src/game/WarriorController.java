@@ -11,6 +11,9 @@ public class WarriorController implements KeyListener {
     private GameWorld world;
 
 
+    private boolean WarriorAttack;
+
+
     private boolean isFacingRight = false;
 
     // in order to allow the player to move the character in the direction it is facing, to jump or run etc
@@ -18,6 +21,8 @@ public class WarriorController implements KeyListener {
     public WarriorController(Warrior warrior, GameWorld world) {
         this.warrior = warrior;
         this.world = world;
+        WarriorAttack = false;
+
 
     }
 
@@ -52,9 +57,14 @@ public class WarriorController implements KeyListener {
                 warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJumpLeft.gif", imageScale - 1));
             }
 
-        } else if (code == KeyEvent.VK_M)
+        } else if (code == KeyEvent.VK_M){
             attack();
-            warrior.attack(world.getBat());
+
+
+
+
+        }
+
 
     }
 
@@ -102,19 +112,12 @@ public class WarriorController implements KeyListener {
 
     }
 
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

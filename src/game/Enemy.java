@@ -15,7 +15,6 @@ public abstract class Enemy extends Walker {
     public abstract int getHealth();
 
     public void TakenHit(int damage){
-        EnemyHealth-= damage;
 
     }
 

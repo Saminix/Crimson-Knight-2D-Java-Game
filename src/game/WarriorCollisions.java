@@ -10,6 +10,7 @@ public class WarriorCollisions implements CollisionListener {
 
     public WarriorCollisions(Warrior warrior) {
         this.warrior = warrior;
+
     }
     @Override
     public void collide(CollisionEvent e) {
@@ -21,8 +22,8 @@ public class WarriorCollisions implements CollisionListener {
             warrior.setHealth(warrior.getHealth() - 20);
             Monster monster = (Monster) e.getOtherBody();
             warrior.attack(monster);
-
         } else if (e.getOtherBody() instanceof Bat) {
+
             warrior.setHealth(warrior.getHealth() - 10);
             Bat bat = (Bat) e.getOtherBody();
             warrior.attack(bat);
