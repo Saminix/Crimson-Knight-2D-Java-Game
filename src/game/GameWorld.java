@@ -3,14 +3,18 @@ import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import java.util.ArrayList;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.Body;
 
 
 public class GameWorld extends World {
 
     private final Warrior warrior;
     private Monster monster;
+
+    private Trampoline trampoline;
+
+    private ArrayList<Bat> bats = new ArrayList<>();
+
+    private  Bat bat;
 
 
     private Point pointOrb;
@@ -30,9 +34,25 @@ public class GameWorld extends World {
         WarriorCollisions trap = new WarriorCollisions(warrior);
         warrior.addCollisionListener(trap);
 
-        Monster monster = new Monster(this,80,12,this);
-        monster.setPosition(new Vec2(2, -9f));
-        monster.chaseWarrior(getWarrior());
+        Monster monster = new Monster(this,30,12,this);
+        monster.setPosition(new Vec2(-5, -9f));
+
+
+
+
+        Vec2 batPosition = new Vec2(50, 2f);
+        bat = new Bat(this,batPosition,60,12,this);
+
+        //Bat bat = new Bat(this,40,12,this);
+        //bat.setPosition(new Vec2(40, 2f));
+
+
+
+
+
+
+
+
 
         new BoxCrate(this).setPosition(new Vec2(-20,-18.5f));
 
@@ -78,12 +98,32 @@ public class GameWorld extends World {
         platform5.setPosition(new Vec2(49f, -2f));
         platform5.addImage(new BodyImage("data/grassplatform.png", 6f));
 
+        //new Trampoline(this).setPosition(new Vec2(100,-103));
+        //Trampoline trampoline = new Trampoline(this);
+        //trampoline.setPosition(new Vec2(50,-41));
+        Vec2 trampolinePosition = new Vec2(31, -11);
+        trampoline = new Trampoline(this, trampolinePosition);
+
+
+
+
+        //Vec2 batPosition2 = new Vec2(70, -3f); // Example position for bat2
+        //Bat bat2 = new Bat(this, batPosition2, 12, 12, this);
+        //bats.add(bat2);
+
+
+
 
 
 
         // Add coins
         new Coins(this).setPosition(new Vec2(-13.5f,-3f));
         new Coins(this).setPosition(new Vec2(-15.5f,-3f));
+
+        new Coins(this).setPosition(new Vec2(50f,-10f));
+        new Coins(this).setPosition(new Vec2(49f,-10f));
+        new Coins(this).setPosition(new Vec2(59f,-10f));
+        new Coins(this).setPosition(new Vec2(61f,-10f));
 
 
 
@@ -105,9 +145,30 @@ public class GameWorld extends World {
     }
 
 
+    public  Vec2 TrampolineGetPosition(){
+        return trampoline.setPosition;
+    }
+
+    public  Vec2 BatGetPosition(){
+        return bat.setPosition;
+    }
+
+
     public void setMonsterChase() {
 
     }
+
+    public Bat getBat() {
+        return bat;
+    }
+
+    public void removeBat() {
+        // Remove bat from the world
+        bat.destroy();
+        // Set bat reference to null
+        bat = null;
+    }
+
 
 
 
