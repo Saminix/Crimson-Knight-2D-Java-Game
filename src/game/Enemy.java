@@ -1,10 +1,8 @@
 package game;
 import city.cs.engine.*;
 public abstract class Enemy extends Walker {
-
     protected int EnemyHealth;
     protected int EnemySpeed;
-
 
     public Enemy(World world, Shape shape, int EnemyHealth, int EnemySpeed){
         super(world,shape);
@@ -12,26 +10,14 @@ public abstract class Enemy extends Walker {
         this.EnemySpeed = EnemySpeed;
     }
 
-
     public abstract void chaseWarrior(Warrior warrior);
-
-
-
-    public abstract void movement();
-
-
-    //public abstract void destroyBuild();
 
     public abstract int getHealth();
 
-
-
-    public void TakenHit(){
+    public void TakenHit(int damage){
+        EnemyHealth-= damage;
 
     }
-
-
-    public abstract void getEnemies();
 
     public abstract int decrementHealth(int x);
 }
