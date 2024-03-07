@@ -6,8 +6,8 @@ import org.jbox2d.common.Vec2;
 public class Trampoline extends StaticBody implements StepListener{
 
 
-    private static final Shape trampolineShape = new BoxShape(2.2f,0.2F);
-    private static final BodyImage image = new BodyImage("data/movingPlatform.png", 2.5f);
+    private static final Shape trampolineShape = new BoxShape(2.5f,0.2F);
+    private static final BodyImage image = new BodyImage("data/movingGrassPlatform.png", 4.5f);
     public Vec2 setPosition;
     private  Vec2 startPosition;
 
@@ -15,12 +15,13 @@ public class Trampoline extends StaticBody implements StepListener{
     private float top, bottom;
     private float delta;
 
-    public Trampoline(World w, Vec2 position){
+    public Trampoline(World w, Vec2 position, float height){
+        //height is the amount is travels up and down
         super(w, trampolineShape);
         this.addImage(image);
         startPosition = position;
         bottom = startPosition.y;
-        top = startPosition.y+10;
+        top = startPosition.y+ height;
         delta=0.08f;
         setPosition(startPosition);
         w.addStepListener(this);

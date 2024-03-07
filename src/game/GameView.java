@@ -34,7 +34,6 @@ public class GameView extends UserView {
 
 
 
-
     @Override
     protected void paintForeground(Graphics2D g) {
         super.paintForeground(g);
