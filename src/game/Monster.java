@@ -15,6 +15,7 @@ public class Monster extends Enemy {
     public Monster(World world,int EnemyHealth, int EnemySpeed, GameWorld gameworld) {
         super(world, monsterShape,EnemyHealth,EnemySpeed );
         this.targetWarrior = targetWarrior;
+        world.addStepListener(this);
         this.world = gameworld;
         this.addImage(image);
 
@@ -24,16 +25,12 @@ public class Monster extends Enemy {
 
 
     @Override
-    public void chaseWarrior(Warrior warrior) {
-    }
-
-
-    @Override
     public void TakenHit(int damage){
         decrementHealth(damage);
         if (getHealth() <= 0) {
             destroy();
-            Point point = new Point(world);
+            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y);
+            point.collectItem(10);
             point.setPosition(getPosition());
             // Destroy monster if health is zero or below
         }else{
@@ -49,6 +46,16 @@ public class Monster extends Enemy {
     public int getHealth(){
         return EnemyHealth;
     }
+
+    @Override
+    public void preStep(StepEvent stepEvent) {
+
+    }
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+    }
+
 
     @Override
     public int decrementHealth(int x){ EnemyHealth = EnemyHealth - x;return EnemyHealth;}

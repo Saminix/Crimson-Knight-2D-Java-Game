@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Warrior extends Walker {
     private static final Shape warriorShape = new PolygonShape(-1.12f,-2.55f, 0.76f,-2.57f, 1.52f,-0.28f, 1.35f,1.93f, -0.9f,2.33f, -1.47f,0.14f, -1.22f,-2.28f);
-    private static final BodyImage image = new BodyImage("data/HoodedCharacter/HWarriorStop.gif", 7.5f);
+    private static final BodyImage image = new BodyImage("data/HoodedCharacter/HWarriorStop.gif", 6.9f);
 
     private int coins;
     private int score;

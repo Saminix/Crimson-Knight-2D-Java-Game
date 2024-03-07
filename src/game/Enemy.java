@@ -1,6 +1,6 @@
 package game;
 import city.cs.engine.*;
-public abstract class Enemy extends Walker {
+public abstract class Enemy extends Walker implements StepListener {
     protected int EnemyHealth;
     protected int EnemySpeed;
 
@@ -10,7 +10,6 @@ public abstract class Enemy extends Walker {
         this.EnemySpeed = EnemySpeed;
     }
 
-    public abstract void chaseWarrior(Warrior warrior);
 
     public abstract int getHealth();
 

@@ -39,7 +39,7 @@ public class Game {
 
         //3. make a view to look into the game world
         world = new GameWorld();
-        view = new GameView(world, 800, 700);
+        view = new GameView(world, 820, 600);
         WarriorController controller = new WarriorController(world.getWarrior(), new GameWorld());
         view.addKeyListener(controller);
         view.addKeyListener(controller);
@@ -74,7 +74,7 @@ public class Game {
 
 
         //optional: uncomment this to make a debugging view
-        JFrame debugView = new DebugViewer(world, 850, 700);
+        JFrame debugView = new DebugViewer(world, 800, 600);
 
 
 
