@@ -1,22 +1,28 @@
 package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
-public class Point extends StaticBody {
+import org.jbox2d.common.Vec2;
 
-    private static final Shape pointorb = new CircleShape(0.5F);
-    private static final BodyImage image = new BodyImage("data/pointOrb.gif", 3);
+public class Point extends Collectibles {
 
 
-    public Point(World world){
-        super(world, pointorb);
-        this.addImage(image);
+    private static final String imagePath = "data/PointOrb.gif";
+
+    public Point(World world, float boxSizeWidth, float x, float y){
+        super(world, new CircleShape(boxSizeWidth), new Vec2(x,y));
+        float height = 2;
+        addImage(new BodyImage(imagePath, height));
     }
 
 
-    public void MakePoint(){
-        Point point = new Point(getWorld());
-        point.setPosition(getPosition());
+
+    @Override
+    public int collectItem(int value){
+        return value;
+
     }
+
+
 
 
 

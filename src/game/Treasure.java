@@ -1,30 +1,30 @@
 package game;
 import city.cs.engine.*;
+import org.jbox2d.common.Vec2;
 
-import city.cs.engine.StaticBody;
-
-public class Treasure extends StaticBody {
-
-    private static final Shape treasureShape = new CircleShape(2);
-    private static final BodyImage image = new BodyImage("data/Treasure.gif", 5f);
-    private int treasure = 50;
+public class Treasure extends Collectibles{
 
 
-    public Treasure(World world){
-        super(world, treasureShape);
-        addImage(image);
-        this.treasure = treasure;
+    private static final String imagePath = "data/Treasure.gif";
 
-    }
-
-    public int CollectTreasure(){
-        return treasure;
-
+    public Treasure(World world, float boxSizeWidth, float boxSizeHeight, float x, float y){
+        super(world, new BoxShape(boxSizeWidth, boxSizeHeight), new Vec2(x,y));
+        float height = 5;
+        addImage(new BodyImage(imagePath, height));
     }
 
 
+
+    @Override
+    public int collectItem(int value){
+        return value;
+
+    }
 
 
 
 }
+
+
+
 
