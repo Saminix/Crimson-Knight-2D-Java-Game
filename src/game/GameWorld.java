@@ -2,7 +2,10 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
+import javax.swing.*;
 import java.util.ArrayList;
+
+import java.util.Random;
 
 
 
@@ -19,17 +22,15 @@ public class GameWorld extends World {
     private  Bat bat;
 
 
-    private Point pointOrb;
-
     public GameWorld(){
         super();
 
         //this.pointOrb = new Point(this);
         // Create the warrior
         warrior = new Warrior(this);
-        warrior.setPosition(new Vec2(7, -9)); // Set initial position of the warrior
+        warrior.setPosition(new Vec2(56, -9)); // Set initial position of the warrior
 
-        // Add collision listener for coin pickups
+        // Add collision listener for coin/treasure/points/potion pickups
         WarriorPickup pickup = new WarriorPickup(warrior, treasure);
         warrior.addCollisionListener(pickup);
 
@@ -52,29 +53,72 @@ public class GameWorld extends World {
 
 
 
+        float boxX = -165;
+        float boxY = -19;
+
+        int Boxs = 4;
+        for(int i = 0; i < Boxs; i++){
+            BoxCrate box = new BoxCrate(this);
+            box.setPosition(new Vec2(boxX, boxY));
+            boxX+=37;
+
+        }
+
+        float startcoinX = -164;
+        float startcoinY = -18;
+
+        int numCoins2 = 22;
+        for(int i = 0; i < numCoins2; i++){
+            Coins coins = new Coins(this);
+            coins.setPosition(new Vec2(startcoinX, startcoinY));
+            startcoinX+=6;
+
+        }
+
+
+        float startTurtleX = -150;
+        float startTurtleY = -20;
+
+        int numTurtle = 4;
+        for(int i = 0; i < numTurtle; i++){
+            Trap turtle = new Trap(this, "data/obstacle1.gif", 7);
+            turtle.setPosition(new Vec2(startTurtleX, startTurtleY));
+            startTurtleX+=35;
+
+        }
+
+
+
+        float gstartX = -165;
+        float gstartY = -23.5f;
+
+
+
+        int numPlatforms = 4;
+        for(int i = 0; i < numPlatforms; i++){
+            Shape groundShape = new BoxShape(28, 2f); // Set the shape of the ground
+            StaticBody grounds = new StaticBody(this, groundShape);
+            grounds.addImage(new BodyImage("data/grassfloor.png", 7));
+            grounds.setPosition(new Vec2(gstartX, gstartY));
+            gstartX+=56;
+
+        }
 
 
 
 
+        float waterX = 42;
+        float waterY = -19.5f;
 
-        new BoxCrate(this).setPosition(new Vec2(-20,-18.5f));
+        int waterp = 2;
+        for(int i = 0; i < waterp; i++){
+            Shape waterShape = new BoxShape(20, 1f); // Set the shape of the ground
+            StaticBody waterGround = new StaticBody(this, waterShape);
+            waterGround.addImage(new BodyImage("data/wavesg.gif", 20));
+            waterGround.setPosition(new Vec2(waterX, waterY));
+            waterX+=37.89f;
 
-        // Create the ground
-        Shape groundShape = new BoxShape(28, 2f); // Set the shape of the ground
-        StaticBody ground = new StaticBody(this, groundShape);
-        ground.setPosition(new Vec2(0f, -23.5f)); // Set position of the ground
-        ground.addImage(new BodyImage("data/grassfloor.png", 7)); // Add image to the ground
-
-        //make water floor
-        Shape waterShape = new BoxShape(25, 2f); // Set the shape of the ground
-        StaticBody waterGround = new StaticBody(this, waterShape);
-        waterGround.setPosition(new Vec2(51f, -23.5f)); // Set position of the ground
-        waterGround.addImage(new BodyImage("data/WaterPlatform.gif", 7));
-
-        Shape groundShape1 = new BoxShape(28, 2f); // Set the shape of the ground
-        StaticBody ground1 = new StaticBody(this, groundShape1);
-        ground1.setPosition(new Vec2(101f, -23.5f)); // Set position of the ground
-        ground1.addImage(new BodyImage("data/grassfloor.png", 7));
+        }
 
 
 
@@ -83,7 +127,6 @@ public class GameWorld extends World {
         StaticBody platform1 = new StaticBody(this, platformShape1);
         platform1.setPosition(new Vec2(-9, -6f));
         platform1.addImage(new BodyImage("data/grassplatform.png", 6));
-
 
 
         Shape platformShape3 = new BoxShape(12.5f, 1f);
@@ -96,10 +139,27 @@ public class GameWorld extends World {
         StaticBody platform4 = new StaticBody(this, platformShape4);
         platform4.setPosition(new Vec2(49f, -13.5f));
         platform4.addImage(new BodyImage("data/grassplatform.png", 6f));
+
         Shape platformShape5 = new BoxShape(12.5f, 1f);
         StaticBody platform5 = new StaticBody(this, platformShape5);
         platform5.setPosition(new Vec2(49f, -2f));
         platform5.addImage(new BodyImage("data/grassplatform.png", 6f));
+
+
+        float g2startX = 130f;
+        float g2startY = -23.5f;
+        //make second grass floor loop
+
+
+        int num2Platforms = 2;
+        for(int i = 0; i < num2Platforms; i++){
+            Shape groundShape = new BoxShape(28, 2f); // Set the shape of the ground
+            StaticBody grounds = new StaticBody(this, groundShape);
+            grounds.addImage(new BodyImage("data/grassfloor.png", 7));
+            grounds.setPosition(new Vec2(g2startX, g2startY));
+            g2startX+=56;
+
+        }
 
         //new Trampoline(this).setPosition(new Vec2(100,-103));
         //Trampoline trampoline = new Trampoline(this);
@@ -115,6 +175,19 @@ public class GameWorld extends World {
         //bats.add(bat2);
 
 
+
+        //using forloop to add 10 coins to the game world along intervals of x,
+        // the value of x coordinate is incremented by x
+        float startX = 135;
+        float startY = -18;
+
+        int numCoins = 10;
+        for(int i = 0; i < numCoins; i++){
+            Coins coins = new Coins(this);
+            coins.setPosition(new Vec2(startX, startY));
+            startX+=8;
+
+        }
 
 
 
@@ -135,7 +208,7 @@ public class GameWorld extends World {
         Trap turtle = new Trap(this, "data/obstacle1.gif", 7);
         turtle.setPosition(new Vec2(-6, -3.4f));
         Trap beartrap = new Trap(this, "data/beartrap.gif",5);
-        beartrap.setPosition(new Vec2(46, -10.9f));
+        beartrap.setPosition(new Vec2(45, -10.9f));
 
     }
 

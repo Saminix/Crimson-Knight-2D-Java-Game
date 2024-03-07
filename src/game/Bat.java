@@ -80,15 +80,14 @@ public class Bat extends Enemy implements StepListener {
 
     @Override
     public void TakenHit(int damage) {
-        super.TakenHit(damage);
+        decrementHealth(damage);
         if (getHealth() <= 0) {
             destroy();
             Point point = new Point(world);
             point.setPosition(getPosition());
-
-        } else {
-
         }
+
+
     }
 
     @Override

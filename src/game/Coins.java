@@ -16,4 +16,7 @@ public class Coins extends StaticBody {
         super(world, coinsShape);
         addImage(image);
     }
+
+
+
 }
