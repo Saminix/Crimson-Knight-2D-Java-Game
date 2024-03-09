@@ -27,6 +27,12 @@ public class WarriorPickup implements CollisionListener {
             int collectedTreasure = ((Treasure) e.getOtherBody()).collectItem(60);
             warrior.setCoins(warrior.getCoins() + collectedTreasure);
             e.getOtherBody().destroy();
+        } else if (e.getOtherBody() instanceof Potion) {
+            if (warrior.getHealth() < 90) {
+                warrior.setHealth(Math.min(warrior.getHealth() + 10, 100));
+                e.getOtherBody().destroy();
+            }
+
         }
     }
 }

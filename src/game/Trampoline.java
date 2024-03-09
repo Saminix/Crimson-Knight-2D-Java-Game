@@ -15,14 +15,14 @@ public class Trampoline extends StaticBody implements StepListener{
     private float top, bottom;
     private float delta;
 
-    public Trampoline(World w, Vec2 position, float height){
+    public Trampoline(World w, Vec2 position, float height, float speed){
         //height is the amount is travels up and down
         super(w, trampolineShape);
         this.addImage(image);
         startPosition = position;
         bottom = startPosition.y;
         top = startPosition.y+ height;
-        delta=0.08f;
+        delta=speed;
         setPosition(startPosition);
         w.addStepListener(this);
 
