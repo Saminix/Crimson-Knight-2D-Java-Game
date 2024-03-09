@@ -1,6 +1,4 @@
 
-
-
 package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
@@ -16,13 +14,6 @@ public class Coins extends Collectibles{
         addImage(new BodyImage(imagePath, height));
     }
 
-
-
-    @Override
-    public int collectItem(int value){
-        return value;
-
-    }
 
 
 

@@ -1,18 +1,16 @@
 package game;
 import city.cs.engine.*;
+import org.jbox2d.common.Vec2;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class WarriorController implements KeyListener {
     private Warrior warrior;
     private static final int walkSpeed = 10;
-    private static final int jumpSpeed = 12;
-    private static final float imageScale = 7.5f;
+    private static final int jumpSpeed = 15;
+    private static final float imageScale = 6.8f;
     private GameWorld world;
-
-
-    private boolean WarriorAttack;
-
 
     private boolean isFacingRight = false;
 
@@ -21,7 +19,7 @@ public class WarriorController implements KeyListener {
     public WarriorController(Warrior warrior, GameWorld world) {
         this.warrior = warrior;
         this.world = world;
-        WarriorAttack = false;
+
 
 
     }
@@ -36,30 +34,17 @@ public class WarriorController implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_A) {
-            warrior.startWalking(-walkSpeed);
-            warrior.removeAllImages();
-            warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUNLeft.gif", imageScale));
-            isFacingRight = false;
+           setWarriorMoveLeft();
 
         } else if (code == KeyEvent.VK_D) {
-            warrior.startWalking(walkSpeed);
-            warrior.removeAllImages();
-            warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUN.gif", imageScale));
-            isFacingRight = true;
+            setWarriorMove();
 
         } else if (code == KeyEvent.VK_W) {
-            warrior.jump(jumpSpeed);
-            if (isFacingRight) {
-                warrior.removeAllImages();
-                warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJump.gif", imageScale - 1));
-            } else {
-                warrior.removeAllImages();
-                warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJumpLeft.gif", imageScale - 1));
-            }
+            setWarriorJump();
+
 
         } else if (code == KeyEvent.VK_M){
             attack();
-
 
 
 
@@ -72,8 +57,8 @@ public class WarriorController implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_A || code == KeyEvent.VK_D) {
-            setWarriorToStop();
             warrior.stopWalking();
+            setWarriorToStop();
         } else if (code == KeyEvent.VK_M) {
             warrior.stopWalking();
             setWarriorToStop();
@@ -95,6 +80,35 @@ public class WarriorController implements KeyListener {
         }
     }
 
+    private void setWarriorJump(){
+        warrior.jump(jumpSpeed);
+        if (isFacingRight) {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJump.gif", imageScale - 1));
+        } else {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJumpLeft.gif", imageScale - 1));
+        }
+
+    }
+
+    private void setWarriorMove(){
+        warrior.startWalking(walkSpeed);
+        warrior.removeAllImages();
+        warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUN.gif", imageScale));
+        isFacingRight = true;
+
+    }
+
+    private void setWarriorMoveLeft(){
+        warrior.startWalking(-walkSpeed);
+        warrior.removeAllImages();
+        warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUNLeft.gif", imageScale));
+        isFacingRight = false;
+
+    }
+
+
     private void attack() {
 
         if (isFacingRight) {
@@ -111,6 +125,8 @@ public class WarriorController implements KeyListener {
         //} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 
     }
+
+
 
 
 

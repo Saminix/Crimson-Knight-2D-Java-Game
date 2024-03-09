@@ -26,5 +26,9 @@ public class Point extends Collectibles {
 
 
 
+
+
+
+
 }
 

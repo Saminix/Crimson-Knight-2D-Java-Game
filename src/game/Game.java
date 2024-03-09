@@ -39,7 +39,7 @@ public class Game {
 
         //3. make a view to look into the game world
         world = new GameWorld();
-        view = new GameView(world, 820, 600);
+        view = new GameView(world, 800, 600);
         WarriorController controller = new WarriorController(world.getWarrior(), new GameWorld());
         view.addKeyListener(controller);
         view.addKeyListener(controller);

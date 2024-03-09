@@ -1,6 +1,8 @@
 package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
+import org.jbox2d.common.Vec2;
+
 import javax.swing.JOptionPane;
 
 
@@ -8,11 +10,11 @@ import javax.swing.JOptionPane;
 
 public class Warrior extends Walker {
     private static final Shape warriorShape = new PolygonShape(-1.12f,-2.55f, 0.76f,-2.57f, 1.52f,-0.28f, 1.35f,1.93f, -0.9f,2.33f, -1.47f,0.14f, -1.22f,-2.28f);
-    private static final BodyImage image = new BodyImage("data/HoodedCharacter/HWarriorStop.gif", 6.9f);
+    private static final BodyImage image = new BodyImage("data/HoodedCharacter/HWarriorStop.gif", 6.4f);
 
     private int coins;
-    private int score;
 
+    private int score;
 
     //private GameView view;
 
@@ -21,6 +23,7 @@ public class Warrior extends Walker {
     public Warrior(World world){
         super(world, warriorShape);
         this.addImage(image);
+        setGravityScale(2);
 
         //this.view = view;
 
@@ -28,6 +31,7 @@ public class Warrior extends Walker {
         this.score = 0;
         this.health = 100;
         Shape warriorShape1 = this.warriorShape;
+
 
 
     }
@@ -57,15 +61,17 @@ public class Warrior extends Walker {
     public void setScore(int score){ this.score = score;}
 
     public void attack(Enemy enemy) {
-        int damage = 10; // or whatever value you want
-        enemy.TakenHit(damage);
+             // or whatever value you want
+            enemy.TakenHit();
+
     }
+
+
 
 
     public int getScore() {
         return score;
     }
-
 
 
 

@@ -4,62 +4,95 @@ import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
 
-public class Monster extends Enemy {
-
-    private static final Shape monsterShape = new PolygonShape(-1.55f,-3.68f, 0.93f,-3.57f, 1.8f,-0.65f, 0.95f,2.44f, -1.42f,2.46f, -2.03f,-0.67f, -1.78f,-3.34f);
-    private static final BodyImage image = new BodyImage("data/Monster1.gif", 8.5f);
-    private GameWorld world;
-    private Warrior targetWarrior;
+public class Monster extends Enemy implements StepListener {
+    private static final Shape monsterShape = new CircleShape(2);
+    private static final BodyImage image = new BodyImage("data/CactusMonster.gif", 10.5f);
+    private final GameWorld gameWorld;
 
 
-    public Monster(World world,int EnemyHealth, int EnemySpeed, GameWorld gameworld) {
+    private boolean movingLeft = false;
+    private  Vec2 startPosition;
+    private float left, right;
+    private float delta;
+
+    public Monster(World world,Vec2 position, int EnemyHealth, int EnemySpeed, GameWorld gameWorld) {
         super(world, monsterShape,EnemyHealth,EnemySpeed );
-        this.targetWarrior = targetWarrior;
+        startPosition = position;
+        left = startPosition.x - 12;
+        right = startPosition.x + 12;
+        delta = 0.12f;
+        setPosition(startPosition);
+
         world.addStepListener(this);
-        this.world = gameworld;
+        //implement access of the game-world for public methods.
+        this.gameWorld = gameWorld;
+
         this.addImage(image);
 
-    }
-
-
-
-
-    @Override
-    public void TakenHit(int damage){
-        decrementHealth(damage);
-        if (getHealth() <= 0) {
-            destroy();
-            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y);
-            point.collectItem(10);
-            point.setPosition(getPosition());
-            // Destroy monster if health is zero or below
-        }else{
-
-        }
 
     }
 
-    public void setPosition(Vec2 position) {super.setPosition(position);}
-
-
-    @Override
-    public int getHealth(){
-        return EnemyHealth;
-    }
 
     @Override
     public void preStep(StepEvent stepEvent) {
+        if (getPosition().x <= left || getPosition().x >= right) {
+            // Change direction and update position
+            if (getPosition().x <= left) {
+                movingLeft = true;
+                monsterLeft();
+            } else {
+                movingLeft = false;
+                monsterRight();
+            }
+            delta *= -1; // Reverse the direction
+        }
+        Vec2 newPosition = new Vec2(getPosition().x + delta, getPosition().y);
+        setPosition(newPosition);
 
     }
+
+
 
     @Override
     public void postStep(StepEvent stepEvent) {
     }
+
+    public void monsterLeft(){
+        if (movingLeft){
+            removeAllImages();
+            addImage(new BodyImage("data/CactusMonsterLeft.gif", 9.5f));
+        }
+
+    }
+
+    public void monsterRight(){
+        if(!movingLeft ){
+            removeAllImages();
+            addImage(new BodyImage("data/CactusMonster.gif", 9.5f));
+        }
+    }
+
+
+    public void setPosition(Vec2 position) {super.setPosition(position);}
 
 
     @Override
     public int decrementHealth(int x){ EnemyHealth = EnemyHealth - x;return EnemyHealth;}
 
 
+    @Override
+    public void TakenHit() {
+        if (getHealth() <= 0) {
+            destroy();
+            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y);
+            point.setPosition(getPosition());
+        }
 
+
+    }
+
+    @Override
+    public int getHealth(){
+        return EnemyHealth;
+    }
 }
