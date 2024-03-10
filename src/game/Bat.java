@@ -3,9 +3,8 @@ import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
-import city.cs.engine.Fixture;
-import city.cs.engine.SolidFixture;
 
+//create a subclass Bat which inherits the constructor from Enemy using the super()
 
 public class Bat extends Enemy implements StepListener  {
     private static final Shape batShape = new PolygonShape(-0.09f,1.16f, -1.2f,0.78f, -1.2f,0.02f, -0.09f,-0.4f, 0.68f,-0.32f, 1.24f,0.51f, 0.3f,1.16f);
@@ -20,12 +19,12 @@ public class Bat extends Enemy implements StepListener  {
 
     private float delta;
 
-    public Bat(World world,Vec2 position, int EnemyHealth, int EnemySpeed, GameWorld gameWorld) {
+    public Bat(World world,Vec2 position, int EnemyHealth, float EnemySpeed, GameWorld gameWorld) {
         super(world, batShape,EnemyHealth,EnemySpeed );
         startPosition = position;
         left = startPosition.x - 10;
         right = startPosition.x + 10;
-        delta = 0.08f;
+        delta = EnemySpeed;
         setPosition(startPosition);
 
         //makes the bat move(step-listener)
@@ -65,6 +64,7 @@ public class Bat extends Enemy implements StepListener  {
     @Override
     public void postStep(StepEvent stepEvent) {
     }
+    //changing the way the bat moves left and right animation
 
     public void batLeft(){
         if (movingLeft){

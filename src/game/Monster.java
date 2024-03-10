@@ -3,36 +3,34 @@ import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
-
+//create a subclass Monster which inherits the constructor from Enemy using the super()
 public class Monster extends Enemy implements StepListener {
     private static final Shape monsterShape = new CircleShape(2);
     private static final BodyImage image = new BodyImage("data/CactusMonster.gif", 10.5f);
     private final GameWorld gameWorld;
-
 
     private boolean movingLeft = false;
     private  Vec2 startPosition;
     private float left, right;
     private float delta;
 
-    public Monster(World world,Vec2 position, int EnemyHealth, int EnemySpeed, GameWorld gameWorld) {
+    public Monster(World world,Vec2 position, int EnemyHealth, float EnemySpeed, GameWorld gameWorld) {
         super(world, monsterShape,EnemyHealth,EnemySpeed );
         startPosition = position;
         left = startPosition.x - 12;
         right = startPosition.x + 12;
-        delta = 0.12f;
+        delta=EnemySpeed;
         setPosition(startPosition);
 
         world.addStepListener(this);
         //implement access of the game-world for public methods.
         this.gameWorld = gameWorld;
-
         this.addImage(image);
 
 
     }
 
-
+//make the Monster move left and right with step-listener and range of 12:
     @Override
     public void preStep(StepEvent stepEvent) {
         if (getPosition().x <= left || getPosition().x >= right) {
@@ -56,6 +54,7 @@ public class Monster extends Enemy implements StepListener {
     @Override
     public void postStep(StepEvent stepEvent) {
     }
+    //changing the way the monster moves left and right animation
 
     public void monsterLeft(){
         if (movingLeft){
