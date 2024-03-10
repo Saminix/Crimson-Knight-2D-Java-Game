@@ -2,9 +2,9 @@ package game;
 import city.cs.engine.*;
 public abstract class Enemy extends StaticBody {
     protected int EnemyHealth;
-    protected int EnemySpeed;
+    protected float EnemySpeed;
 
-    public Enemy(World world, Shape shape, int EnemyHealth, int EnemySpeed){
+    public Enemy(World world, Shape shape, int EnemyHealth, float EnemySpeed){
         super(world,shape);
         this.EnemyHealth = EnemyHealth;
         this.EnemySpeed = EnemySpeed;

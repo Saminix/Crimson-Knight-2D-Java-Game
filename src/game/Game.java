@@ -1,17 +1,11 @@
 package game;
 
 import city.cs.engine.*;
-import city.cs.engine.Shape;
-import org.jbox2d.common.Vec2;
-import game.GameView;
+
 
 import javax.swing.*;
 
-import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 /**
  * Your main game entry point
@@ -23,19 +17,13 @@ public class Game {
     /** A graphical display of the world (a specialised JPanel). */
     private GameView view;
 
-    private SoundClip gameMusic;
+
+
 
 
     /** Initialise a new Game. */
     public Game() {
 
-        // World world = new World();
-
-
-
-
-        //Shape shape = new CircleShape(1.5f);
-        //Body ball = new DynamicBody(world, shape);
 
         //3. make a view to look into the game world
         world = new GameWorld();
@@ -49,10 +37,6 @@ public class Game {
         view.setCentre(world.getWarrior().getPosition());
         //optional: draw a 1-metre grid over the view
         // view.setGridResolution(1);
-
-
-
-
 
 
 
@@ -86,6 +70,10 @@ public class Game {
         view.requestFocus();
 
     }
+
+
+
+
 
     /** Run the game. */
     public static void main(String[] args) {
