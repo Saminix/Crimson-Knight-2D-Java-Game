@@ -201,7 +201,9 @@ public class GameWorld extends World  {
         return warrior;
     }
 
+    public static void main(String[] args) {
 
+    }
 
 
 }
