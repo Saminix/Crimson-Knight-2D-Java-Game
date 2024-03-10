@@ -13,7 +13,7 @@ public class GameWorld extends World  {
 
         // Create the warrior
         warrior = new Warrior(this);
-        warrior.setPosition(new Vec2(-90, -10.5f)); // Set initial position of the warrior
+        warrior.setPosition(new Vec2(-190, -10.5f)); // Set initial position of the warrior
 
 
         // Add collision listener for coin/treasure/points/potion pickups
@@ -22,17 +22,21 @@ public class GameWorld extends World  {
         WarriorCollisions trap = new WarriorCollisions(warrior);
         warrior.addCollisionListener(trap);
 
+
         Vec2 monsterPosition = new Vec2(-15, -18.5f);
-        Monster monster = new Monster(this, monsterPosition,50,15,this);
+        Monster monster = new Monster(this, monsterPosition,45,0.12f,this);
 
         Vec2 monsterPosition1 = new Vec2(65, -18.5f);
-        Monster monster1 = new Monster(this, monsterPosition1,50,15,this);
+        Monster monster1 = new Monster(this, monsterPosition1,45,0.12f,this);
 
 
         Vec2 batPosition = new Vec2(50, 2f);
-        Bat bat = new Bat(this,batPosition,30,12,this);
+        Bat bat = new Bat(this,batPosition,30,0.08f,this);
 
 
+
+
+        //Using a ForLoop to create 4 box crates at different x coordinate intervals
         float boxX = -165;
         float boxY = -18.5f;
 
@@ -67,36 +71,45 @@ public class GameWorld extends World  {
         box5.setPosition(new Vec2(-87, -18.5f));
         BoxCrate box6 = new BoxCrate(this);
         box6.setPosition(new Vec2(-87, -14.5f));
+        BoxCrate box7 = new BoxCrate(this);
+        box7.setPosition(new Vec2(-78.5f, -18.5f));
         //make 3 layer box obstacle
 
+        BoxCrate box8 = new BoxCrate(this);
+        box8.setPosition(new Vec2(103.9f, -17.5f));
 
-        float startCoinX = -164;
+
+
+        //Using a ForLoop to create coins for collection at cohesive x coordinate intervals
+        float startCoinX = -161;
         float startCoinY = -17.9f;
 
-        int numCoins2 = 20;
+        int numCoins2 = 15;
         for(int i = 0; i < numCoins2; i++){
             Coins coins = new Coins(this,0.8f,startCoinX,startCoinY);
             startCoinX+=9;
 
         }
 
+        //Using a ForLoop to create 2 Traps(turtles)  at different x coordinate intervals
 
-        float startTurtleX = -150;
+
+        float startTurtleX = -110;
         float startTurtleY = -19.5f;
 
-        int numTurtle = 3;
+        int numTurtle = 2;
         for(int i = 0; i < numTurtle; i++){
             Trap turtle = new Trap(this, "data/obstacle1.gif", 7);
             turtle.setPosition(new Vec2(startTurtleX, startTurtleY));
-            startTurtleX+=45;
+            startTurtleX+=44;
 
         }
 
         //create Platforms using for loop that extend for the duration of the game;
 
-        float gstartX = -165;
+        float gstartX = -205;
         float gstartY = -22.9f;
-        int numPlatforms = 8;
+        int numPlatforms = 6;
         for(int i = 0; i < numPlatforms; i++){
             GroundPlatform groundPlatform = new GroundPlatform(this,
                     28,2.2f,gstartX, gstartY, "data/grassfloor.png", 7 );
@@ -131,8 +144,8 @@ public class GameWorld extends World  {
 
         //using for-loop to add 10 coins to the game world along intervals of x,
         // the value of x coordinate is incremented by x
-        float startX = 135;
-        float startY = -18;
+        float startX = 133;
+        float startY = -16;
 
         int numCoins = 10;
         for(int i = 0; i < numCoins; i++){
@@ -147,6 +160,9 @@ public class GameWorld extends World  {
         new Coins(this,0.8f,61f,-10f);
 
 
+        //create other instances from other classes
+
+
         Treasure treasure1 = new Treasure(this, 2, 2,65f,-11f);
 
 
@@ -154,13 +170,37 @@ public class GameWorld extends World  {
         turtle.setPosition(new Vec2(-6, -3.4f));
         Trap beartrap = new Trap(this, "data/beartrap.gif",5);
         beartrap.setPosition(new Vec2(52, -10.9f));
-        Potion potion = new Potion(this,1,1,90,-18);
+
+
+        Potion potion = new Potion(this,1,100,-18);
+
+
+        float g2startX = 146f;
+        float g2startY = -21f;
+        int numberPlatforms = 2;
+        for(int i = 0; i < numberPlatforms; i++){
+            GroundPlatform groundPlatform = new GroundPlatform(this,
+                    40,2.6f,g2startX, g2startY, "data/grassfloor.png", 9 );
+            groundPlatform.setPosition(new Vec2(g2startX, g2startY));
+            g2startX+=56;
+
+        }
+
+        //add a checkpoint towards the end of the game(just image)
+
+        GroundPlatform endCheckpoint = new GroundPlatform(this,
+                3,2f,220, -13.2F,"data/endcheck.gif", 9 );
+
+
+
+
 
     }
 
     public Warrior getWarrior(){
         return warrior;
     }
+
 
 
 

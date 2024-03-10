@@ -15,6 +15,8 @@ public class Trampoline extends StaticBody implements StepListener{
     private float top, bottom;
     private float delta;
 
+    //Controlling the speed of the trampoline by assigning a new value in parameter(speed)
+
     public Trampoline(World w, Vec2 position, float height, float speed){
         //height is the amount is travels up and down
         super(w, trampolineShape);

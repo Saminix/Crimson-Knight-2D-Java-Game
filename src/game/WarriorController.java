@@ -1,6 +1,6 @@
 package game;
 import city.cs.engine.*;
-import org.jbox2d.common.Vec2;
+
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -70,6 +70,7 @@ public class WarriorController implements KeyListener {
 
     // method to position which direction the warrior stops in.
     private void setWarriorToStop() {
+        warrior.stopWalking();
         warrior.removeAllImages();
         if (isFacingRight) {
             warrior.removeAllImages();

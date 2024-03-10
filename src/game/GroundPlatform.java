@@ -2,6 +2,8 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
+//create a subclass GroundPlatform which inherits the constructor from Platform using the super()
+
 public class GroundPlatform extends Platform{
 
     public GroundPlatform(World world, float boxSizeWidth, float boxSizeHeight, float x,float y, String path, float height){

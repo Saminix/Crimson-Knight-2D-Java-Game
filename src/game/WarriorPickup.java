@@ -29,9 +29,9 @@ public class WarriorPickup implements CollisionListener {
             e.getOtherBody().destroy();
         } else if (e.getOtherBody() instanceof Potion) {
             if (warrior.getHealth() < 90) {
-                warrior.setHealth(Math.min(warrior.getHealth() + 10, 100));
+                warrior.setHealth(Math.min(warrior.getHealth() + 20, 100));
                 e.getOtherBody().destroy();
-            }
+            }e.getOtherBody().destroy();
 
         }
     }

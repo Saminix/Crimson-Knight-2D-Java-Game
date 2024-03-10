@@ -7,8 +7,8 @@ public class Potion extends Collectibles{
 
     private static final String imagePath = "data/HealthPotion.gif";
 
-    public Potion(World world, float boxSizeWidth, float boxSizeHeight, float x, float y){
-        super(world, new BoxShape(boxSizeWidth, boxSizeHeight), new Vec2(x,y));
+    public Potion(World world, float radius, float x, float y){
+        super(world, new CircleShape(radius), new Vec2(x,y));
         float height = 4;
         addImage(new BodyImage(imagePath, height));
     }
