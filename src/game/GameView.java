@@ -1,6 +1,6 @@
 package game;
 import city.cs.engine.UserView;
-import city.cs.engine.World;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +40,7 @@ public class GameView extends UserView {
         drawHealthBar(g);
         drawCoinCount(g);
         drawScoreCount(g);
+        drawControls(g);
 
 
 
@@ -111,6 +112,20 @@ public class GameView extends UserView {
         g.setColor(Color.darkGray);
         g.drawImage(pointimage, 10, 110, pointWidth, pointHeight, this);
         g.drawString(pointText, 80, 140);
+
+
+    }
+
+
+
+    private void drawControls(Graphics2D g){
+        String controlJumpText = "W - jump / Hold W - Bouncy Jump";
+        String controlWalkText = "A - Move left / D  - Move right";
+        String controlAttackText = "Hold M - attack";
+        g.setColor(Color.darkGray);
+        g.drawString(controlJumpText, 560, 30);
+        g.drawString(controlWalkText, 560, 50);
+        g.drawString(controlAttackText, 560, 70);
 
 
     }
