@@ -10,15 +10,14 @@ public class WarriorController implements KeyListener {
     private static final int walkSpeed = 10;
     private static final int jumpSpeed = 15;
     private static final float imageScale = 6.8f;
-    private GameWorld world;
 
     private boolean isFacingRight = false;
 
     // in order to allow the player to move the character in the direction it is facing, to jump or run etc
 
-    public WarriorController(Warrior warrior, GameWorld world) {
+    public WarriorController(Warrior warrior) {
         this.warrior = warrior;
-        this.world = world;
+
 
 
 
@@ -125,6 +124,13 @@ public class WarriorController implements KeyListener {
         //swordSlash.play();
         //} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 
+    }
+
+
+
+
+    public void updateWarrior(Warrior newWarrior){
+        warrior = newWarrior;
     }
 
 

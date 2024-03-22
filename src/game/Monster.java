@@ -7,15 +7,15 @@ import org.jbox2d.common.Vec2;
 public class Monster extends Enemy implements StepListener {
     private static final Shape monsterShape = new CircleShape(2);
     private static final BodyImage image = new BodyImage("data/CactusMonster.gif", 10.5f);
-    private final GameWorld gameWorld;
+    //private final GameWorld gameWorld;
 
     private boolean movingLeft = false;
     private  Vec2 startPosition;
     private float left, right;
     private float delta;
 
-    public Monster(World world,Vec2 position, int EnemyHealth, float EnemySpeed, GameWorld gameWorld) {
-        super(world, monsterShape,EnemyHealth,EnemySpeed );
+    public Monster(World world,Vec2 position, int EnemyHealth, float EnemySpeed) {
+        super((GameLevel) world, monsterShape,EnemyHealth,EnemySpeed );
         startPosition = position;
         left = startPosition.x - 12;
         right = startPosition.x + 12;
@@ -24,7 +24,7 @@ public class Monster extends Enemy implements StepListener {
 
         world.addStepListener(this);
         //implement access of the game-world for public methods.
-        this.gameWorld = gameWorld;
+        //this.gameWorld = gameWorld;
         this.addImage(image);
 
 

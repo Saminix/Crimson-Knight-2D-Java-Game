@@ -18,9 +18,9 @@ public class GameView extends UserView {
 
 
 
-    public GameView(GameWorld world, int width, int height) {
+    public GameView(GameLevel world, int width, int height, String path) {
         super(world, width, height);
-        background = new ImageIcon("data/forestbac.jpg").getImage();
+        background = new ImageIcon(path).getImage();
         this.warrior = world.getWarrior();
         this.game = game;
 
@@ -29,8 +29,6 @@ public class GameView extends UserView {
 
 
     }
-
-
 
 
 
@@ -117,7 +115,6 @@ public class GameView extends UserView {
     }
 
 
-
     private void drawControls(Graphics2D g){
         String controlJumpText = "W - jump / Hold W - Bouncy Jump";
         String controlWalkText = "A - Move left / D  - Move right";
@@ -130,11 +127,28 @@ public class GameView extends UserView {
 
     }
 
+
+
+    private void drawGameStart(Graphics2D g){
+
+    }
+
+    private void drawLevelEnd(Graphics2D g){
+
+    }
+
+
+
+
+
     @Override
     protected void paintBackground(Graphics2D g) {
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
     }
 
+    public void setBackgroundImage(String imagePath) {
+        background = new ImageIcon(imagePath).getImage();
+    }
 
 
 

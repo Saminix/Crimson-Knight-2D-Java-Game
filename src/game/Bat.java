@@ -9,7 +9,7 @@ import org.jbox2d.common.Vec2;
 public class Bat extends Enemy implements StepListener  {
     private static final Shape batShape = new PolygonShape(-0.09f,1.16f, -1.2f,0.78f, -1.2f,0.02f, -0.09f,-0.4f, 0.68f,-0.32f, 1.24f,0.51f, 0.3f,1.16f);
     private static final BodyImage image = new BodyImage("data/bat.gif", 8.5f);
-    private GameWorld gameWorld;
+    //private GameWorld gameWorld;
 
     private boolean movingLeft = false;
 
@@ -19,8 +19,8 @@ public class Bat extends Enemy implements StepListener  {
 
     private float delta;
 
-    public Bat(World world,Vec2 position, int EnemyHealth, float EnemySpeed, GameWorld gameWorld) {
-        super(world, batShape,EnemyHealth,EnemySpeed );
+    public Bat(World world,Vec2 position, int EnemyHealth, float EnemySpeed) {
+        super((GameLevel) world, batShape,EnemyHealth,EnemySpeed );
         startPosition = position;
         left = startPosition.x - 10;
         right = startPosition.x + 10;
@@ -30,7 +30,7 @@ public class Bat extends Enemy implements StepListener  {
         //makes the bat move(step-listener)
         world.addStepListener(this);
         //implement access of the game-world for public methods.
-        this.gameWorld = gameWorld;
+        //this.gameWorld = gameWorld;
         this.addImage(image);
         getFixtureList().get(0).setDensity(10);
 

@@ -11,7 +11,7 @@ public class Trampoline extends StaticBody implements StepListener{
     public Vec2 setPosition;
     private  Vec2 startPosition;
 
-    private GameWorld world;
+    private GameLevel world;
     private float top, bottom;
     private float delta;
 
