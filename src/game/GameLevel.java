@@ -4,19 +4,22 @@ import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
 public abstract class GameLevel extends World {
-    private Warrior warrior;
+    protected Warrior warrior;
 
     private CheckPoint CheckPoint;
 
     private Enemy enemy;
     private Game game;
 
+
+
     public GameLevel(Game game){
         this.game = game;
 
+
         // Create the warrior
         warrior = new Warrior(this);
-        warrior.setPosition(new Vec2(100, -10.5f)); // Set initial position of the warrior
+        warrior.setPosition(new Vec2(160, -10.5f)); // Set initial position of the warrior
 
         // Add collision listener for coin/treasure/points/potion pickups
         WarriorPickup pickup = new WarriorPickup(warrior);
@@ -24,7 +27,7 @@ public abstract class GameLevel extends World {
         WarriorCollisions trap = new WarriorCollisions(warrior);
         warrior.addCollisionListener(trap);
 
-        warrior.addCollisionListener(new CheckPointEncounter(this, game));
+        warrior.addCollisionListener(new CheckPointEncounter(this, game ));
 
 
 
@@ -34,7 +37,13 @@ public abstract class GameLevel extends World {
     }
 
 
-    public Warrior getWarrior(){return warrior;}
+    public void setWarrior(Warrior warrior) {
+        this.warrior = warrior;
+    }
+
+    public Warrior getWarrior() {
+        return warrior;
+    }
     public Enemy getEnemy(){return enemy;}
 
     public  CheckPoint getCheckPoint(){

@@ -20,17 +20,21 @@ public class Warrior extends Walker {
 
     private int health;
 
+
+
+
     public Warrior(World world){
         super(world, warriorShape);
         this.addImage(image);
         setGravityScale(2);
+
 
         //this.view = view;
 
         this.coins = 0;
         this.score = 0;
         this.health = 100;
-        Shape warriorShape1 = this.warriorShape;
+
 
 
 
@@ -67,11 +71,20 @@ public class Warrior extends Walker {
     }
 
 
+    public void ResetAttributes(){
+        this.coins =0;
+        this.score = 0;
+        this.health = 100;
+
+    }
+
+
 
 
     public int getScore() {
         return score;
     }
+
 
 
 

@@ -18,10 +18,10 @@ public class GameView extends UserView {
 
 
 
-    public GameView(GameLevel world, int width, int height, String path) {
-        super(world, width, height);
+    public GameView(GameLevel level, int width, int height, String path) {
+        super(level, width, height);
         background = new ImageIcon(path).getImage();
-        this.warrior = world.getWarrior();
+        this.warrior = level.getWarrior();
         this.game = game;
 
         gameOver = false;
