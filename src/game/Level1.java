@@ -5,8 +5,11 @@ import org.jbox2d.common.Vec2;
 public class Level1 extends GameLevel{
 
 
+
     public Level1(Game game){
         super(game);
+
+
 
 
 
@@ -186,6 +189,7 @@ public class Level1 extends GameLevel{
     @Override
     public boolean isComplete(){
         return getWarrior().getCoins() > 1;
+
     }
 
 
