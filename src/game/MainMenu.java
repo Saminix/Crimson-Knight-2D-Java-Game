@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 
 public class MainMenu extends ControlPanel {
     private boolean isPressed;
+    private boolean isControlsPressed;
     private Game game;
 
     public MainMenu(Game game) {
         super(game);
         this.isPressed = false;
         this.game = game;
+        this.isControlsPressed = false;
 
         // Create a Frame
         JFrame menu = new JFrame("Menu");
@@ -45,10 +47,12 @@ public class MainMenu extends ControlPanel {
         content.add(titleLabel, titleConstraints);
 
         JButton playButton = new JButton("Play Game");
+        JButton controlsButton = new JButton("Controls");
         JButton quitButton = new JButton("Quit Game");
 
         Dimension buttonSize = new Dimension(200, 40);
         playButton.setPreferredSize(buttonSize);
+        controlsButton.setPreferredSize(buttonSize);
         quitButton.setPreferredSize(buttonSize);
 
         playButton.addActionListener(new ActionListener() {
@@ -64,6 +68,17 @@ public class MainMenu extends ControlPanel {
             }
         });
 
+        controlsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Set isControlsPressed to true when the controls button is pressed
+                isControlsPressed = true;
+                // Show controls instructions (e.g., in a dialog box)
+                JOptionPane.showMessageDialog(content, "Controls: \n W - Jump \n A - Left \n D - Right \n Mouse click - Shoot");
+            }
+        });
+
+
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,6 +91,7 @@ public class MainMenu extends ControlPanel {
         buttonPanel.setLayout(new GridLayout(2, 1, 0, 10)); // GridLayout for vertical alignment
         buttonPanel.setOpaque(false); // Make the button panel transparent
         buttonPanel.add(playButton);
+        buttonPanel.add(controlsButton);
         buttonPanel.add(quitButton);
         GridBagConstraints buttonConstraints = new GridBagConstraints();
         buttonConstraints.gridx = 0;
@@ -88,6 +104,9 @@ public class MainMenu extends ControlPanel {
 
     public boolean IsPlayButtonPressed() {
         return isPressed;
+    }
+    public boolean isControlsButtonPressed() {
+        return isControlsPressed;
     }
 
 
