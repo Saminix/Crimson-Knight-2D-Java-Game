@@ -8,9 +8,11 @@ import city.cs.engine.CollisionListener;
 
 public class WarriorCollisions implements CollisionListener {
     private Warrior warrior;
+    private Game game;
 
-    public WarriorCollisions(Warrior warrior) {
+    public WarriorCollisions(Warrior warrior, Game game) {
         this.warrior = warrior;
+        this.game = game;
 
     }
     @Override
@@ -20,19 +22,31 @@ public class WarriorCollisions implements CollisionListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/WarriorHurt.gif", 6.9f));
             warrior.setHealth(warrior.getHealth() - 5);
         } else if (e.getOtherBody() instanceof Monster) {
-            warrior.setHealth(warrior.getHealth() - 5);
-            Monster monster = (Monster) e.getOtherBody();
-            monster.decrementHealth(13);
-            warrior.attack(monster);
-
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/WarriorHurt.gif", 6.9f));
+            warrior.setHealth(warrior.getHealth() - 15);
+            //warrior.attack(monster);
         } else if (e.getOtherBody() instanceof Bat) {
-
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/WarriorHurt.gif", 6.9f));
             warrior.setHealth(warrior.getHealth() - 10);
-            Bat bat = (Bat) e.getOtherBody();
-            bat.decrementHealth(14);
-            warrior.attack(bat);
+            //warrior.attack(bat);
+        }else if (e.getOtherBody() instanceof Skeleton) {
+            warrior.removeAllImages();
+            warrior.addImage(new BodyImage("data/HoodedCharacter/WarriorHurt.gif", 6.9f));
+            warrior.setHealth(warrior.getHealth() - 25);
+            //warrior.attack(bat);
+        }
+
+        if(warrior.getHealth() <= 0){
+            game.currentLevel.stop();
+            game.disposeCurrentLevelFrame();
+
+            game.showGameOver();
 
         }
 
     }
+
+
 }
