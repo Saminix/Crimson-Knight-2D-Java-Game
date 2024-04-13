@@ -22,9 +22,9 @@ public class Coins extends Collectibles{
     }
 
 
-    public Coins(World world, float radius,float x, float y){
-        super(world, new CircleShape(radius), new Vec2(x,y));
-        float height = 6;
+    public Coins(World world, float radius,float x, float y, float height){
+        super(world, new CircleShape(radius), new Vec2(x,y), height);
+        height = 6;
         addImage(new BodyImage(imagePath, height));
 
     }
