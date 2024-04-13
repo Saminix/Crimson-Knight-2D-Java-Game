@@ -3,6 +3,10 @@ import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 
 //create a subclass Bat which inherits the constructor from Enemy using the super()
 
@@ -18,6 +22,19 @@ public class Bat extends Enemy implements StepListener  {
 
 
     private float delta;
+
+
+    private static SoundClip snarlSound;
+
+    private boolean isPlayingAudio = false;
+
+    static {
+        try {
+            snarlSound = new SoundClip("audio/batnoise.wav");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
 
     public Bat(World world,Vec2 position, int EnemyHealth, float EnemySpeed) {
         super((GameLevel) world, batShape,EnemyHealth,EnemySpeed );
@@ -43,10 +60,12 @@ public class Bat extends Enemy implements StepListener  {
         if (getPosition().x <= left || getPosition().x >= right) {
             // Change direction and update position
             if (getPosition().x <= left) {
+                playbatSound();
                 movingLeft = true;
                 batLeft();
             } else {
                 movingLeft = false;
+                StopPlayingbatSound();
                 batRight();
             }
             delta *= -1; // Reverse the direction
@@ -68,6 +87,7 @@ public class Bat extends Enemy implements StepListener  {
 
     public void batLeft(){
         if (movingLeft){
+            StopPlayingbatSound();
             removeAllImages();
             addImage(new BodyImage("data/batLeft.gif", 8.5f));
         }
@@ -76,6 +96,7 @@ public class Bat extends Enemy implements StepListener  {
 
     public void batRight(){
         if(!movingLeft ){
+            playbatSound();
             removeAllImages();
             addImage(new BodyImage("data/bat.gif", 8.5f));
         }
@@ -91,9 +112,10 @@ public class Bat extends Enemy implements StepListener  {
 
     @Override
     public void TakenHit() {
+        snarlSound.play();
         if (getHealth() <= 0) {
             destroy();
-            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y);
+            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y,6);
             point.setPosition(getPosition());
         }
 
@@ -103,5 +125,20 @@ public class Bat extends Enemy implements StepListener  {
     @Override
     public int getHealth(){
         return EnemyHealth;
+    }
+
+
+    public void playbatSound(){
+        if(!isPlayingAudio){
+            //snarlSound.setVolume(0.4);
+            snarlSound.play();
+            isPlayingAudio = true;
+        }
+    }
+
+
+    public void StopPlayingbatSound(){
+        snarlSound.stop();
+        isPlayingAudio = false;
     }
 }
