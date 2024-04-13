@@ -10,7 +10,7 @@ public abstract class Collectibles extends StaticBody {
 
     private int value;
 
-    public Collectibles(World world, Shape shape, Vec2 position){
+    public Collectibles(World world, Shape shape, Vec2 position, float height){
         super(world, shape);
         this.value = value;
         setPosition(position);
