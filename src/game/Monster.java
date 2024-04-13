@@ -3,6 +3,10 @@ import city.cs.engine.*;
 import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 //create a subclass Monster which inherits the constructor from Enemy using the super()
 public class Monster extends Enemy implements StepListener {
     private static final Shape monsterShape = new CircleShape(2);
@@ -13,6 +17,17 @@ public class Monster extends Enemy implements StepListener {
     private  Vec2 startPosition;
     private float left, right;
     private float delta;
+    private static SoundClip snarlSound;
+
+    private boolean isPlayingAudio = false;
+
+    static {
+        try {
+            snarlSound = new SoundClip("audio/monsterSnarl.wav");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
 
     public Monster(World world,Vec2 position, int EnemyHealth, float EnemySpeed) {
         super((GameLevel) world, monsterShape,EnemyHealth,EnemySpeed );
@@ -59,6 +74,7 @@ public class Monster extends Enemy implements StepListener {
     public void monsterLeft(){
         if (movingLeft){
             removeAllImages();
+            playMonsterSound();
             addImage(new BodyImage("data/CactusMonsterLeft.gif", 9.5f));
         }
 
@@ -67,6 +83,7 @@ public class Monster extends Enemy implements StepListener {
     public void monsterRight(){
         if(!movingLeft ){
             removeAllImages();
+            StopPlayingMonsterSound();
             addImage(new BodyImage("data/CactusMonster.gif", 9.5f));
         }
     }
@@ -81,9 +98,10 @@ public class Monster extends Enemy implements StepListener {
 
     @Override
     public void TakenHit() {
+        snarlSound.play();
         if (getHealth() <= 0) {
             destroy();
-            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y);
+            Point point = new Point(this.getWorld(), 2, getPosition().x, getPosition().y, 6);
             point.setPosition(getPosition());
         }
 
@@ -93,5 +111,19 @@ public class Monster extends Enemy implements StepListener {
     @Override
     public int getHealth(){
         return EnemyHealth;
+    }
+
+    public void playMonsterSound(){
+        if(!isPlayingAudio){
+            //snarlSound.setVolume(0.4);
+            snarlSound.play();
+            isPlayingAudio = true;
+        }
+    }
+
+
+    public void StopPlayingMonsterSound(){
+        snarlSound.stop();
+        isPlayingAudio = false;
     }
 }
