@@ -1,14 +1,28 @@
 package game;
 
+import city.cs.engine.SoundClip;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class Level1 extends GameLevel{
+    private SoundClip gameMusic;
 
 
 
     public Level1(Game game){
         super(game);
 
+        try {
+            gameMusic = new SoundClip("audio/GameMusic.wav");
+            gameMusic.setVolume(0.3);
+            gameMusic.loop();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
 
 
 
@@ -21,6 +35,14 @@ public class Level1 extends GameLevel{
 
         Vec2 batPosition = new Vec2(50, 2f);
         Bat bat = new Bat(this,batPosition,30,0.08f);
+
+
+        Key key = new Key(this,2,55,2,3);
+
+        BoxCrate wall = new BoxCrate(this);
+        wall.setPosition(new Vec2(-200,-18.5f));
+
+        Mushrooms mushrooms = new Mushrooms(this,1.5f,132.5f,-15.6f,3);
 
 
 
@@ -37,16 +59,24 @@ public class Level1 extends GameLevel{
 
         }
 
+        ArrayList<BoxCrate> boxsList = new ArrayList<>();
+
         BoxCrate box1 = new BoxCrate(this);
         box1.setPosition(new Vec2(-124.1f, -18.5f));
+        boxsList.add(box1);
+
         BoxCrate box2 = new BoxCrate(this);
         box2.setPosition(new Vec2(-124.1f, -14.5f));
+        boxsList.add(box2);
 
         BoxCrate box3 = new BoxCrate(this);
         box3.setPosition(new Vec2(-124.1f, -14.5f));
+        boxsList.add(box3);
+
 
         float box2X = -83;
         float box2Y = -18.5f;
+        // Add the three-layered box obstacle
 
 
         int BoxxS = 3;
@@ -56,16 +86,23 @@ public class Level1 extends GameLevel{
             box2Y+=4.5;
 
         }
+
+
         BoxCrate box5 = new BoxCrate(this);
         box5.setPosition(new Vec2(-87, -18.5f));
+        boxsList.add(box5);
+
         BoxCrate box6 = new BoxCrate(this);
         box6.setPosition(new Vec2(-87, -14.5f));
+        boxsList.add(box6);
+
         BoxCrate box7 = new BoxCrate(this);
         box7.setPosition(new Vec2(-78.5f, -18.5f));
-        //make 3 layer box obstacle
+        boxsList.add(box7);
 
         BoxCrate box8 = new BoxCrate(this);
         box8.setPosition(new Vec2(103.9f, -17.5f));
+        boxsList.add(box8);
 
 
 
@@ -75,7 +112,7 @@ public class Level1 extends GameLevel{
 
         int numCoins2 = 15;
         for(int i = 0; i < numCoins2; i++){
-            Coins coins = new Coins(this,0.8f,startCoinX,startCoinY);
+            Coins coins = new Coins(this,0.8f,startCoinX,startCoinY,6);
             startCoinX+=9;
 
         }
@@ -122,37 +159,43 @@ public class Level1 extends GameLevel{
 
         //create trampoline platform
         Vec2 trampolinePosition = new Vec2(31, -11);
-        Trampoline trampoline = new Trampoline(this, trampolinePosition, 10,0.08f);
+        Trampoline trampoline = new Trampoline(this, trampolinePosition, 10,0.08f,2);
 
         Vec2 trampolinePosition1 = new Vec2(42, -17);
-        Trampoline trampoline1 = new Trampoline(this, trampolinePosition1, 5,0.08f);
+        Trampoline trampoline1 = new Trampoline(this, trampolinePosition1, 5,0.08f,2);
 
         Vec2 trampolinePosition2 = new Vec2(5, -17);
-        Trampoline trampoline2 = new Trampoline(this, trampolinePosition2, 10,0.04f);
+        Trampoline trampoline2 = new Trampoline(this, trampolinePosition2, 10,0.04f,2);
 
 
         //using for-loop to add 10 coins to the game world along intervals of x,
         // the value of x coordinate is incremented by x
-        float startX = 133;
+        float startX = 112;
         float startY = -16;
 
-        int numCoins = 10;
+        int numCoins = 4;
         for(int i = 0; i < numCoins; i++){
-            Coins coins = new Coins(this,0.8f,startX,startY);
+            Coins coins = new Coins(this,0.8f,startX,startY,6);
             startX+=8;
 
         }
 
         // Add coins
-        new Coins(this,0.8f,-13.5f,-3f);
-        new Coins(this,0.8f,-15.5f,-3f);
-        new Coins(this,0.8f,61f,-10f);
+        ArrayList<Coins> coinsList = new ArrayList<>();
+        coinsList.add(new Coins(this, 0.8f, -13.5f, -3f, 6));
+        coinsList.add(new Coins(this, 0.8f, -15.5f, -3f, 6));
+        coinsList.add(new Coins(this, 0.8f, 61f, -10f, 6));
+
+
+
+
+
 
 
         //create other instances from other classes
 
 
-        Treasure treasure1 = new Treasure(this, 2, 2,65f,-11f);
+        Treasure treasure1 = new Treasure(this, 2, 2,65f,-11f,5);
 
 
         Trap turtle = new Trap(this, "data/obstacle1.gif", 7);
@@ -161,12 +204,12 @@ public class Level1 extends GameLevel{
         beartrap.setPosition(new Vec2(52, -10.9f));
 
 
-        Potion potion = new Potion(this,1,100,-18);
+        Potion potion = new Potion(this,1,100,-18,4);
 
 
         float g2startX = 146f;
         float g2startY = -21f;
-        int numberPlatforms = 2;
+        int numberPlatforms = 1;
         for(int i = 0; i < numberPlatforms; i++){
             GroundPlatform groundPlatform = new GroundPlatform(this,
                     40,2.6f,g2startX, g2startY, "data/grassfloor.png", 9 );
@@ -178,7 +221,10 @@ public class Level1 extends GameLevel{
         //add a checkpoint towards the end of the game(just image)
 
         CheckPoint flagy = (new CheckPoint(this));
-        flagy.setPosition(new Vec2(220, -13.2f));
+        flagy.setPosition(new Vec2(150, -13.2f));
+
+
+
 
 
 
@@ -188,9 +234,23 @@ public class Level1 extends GameLevel{
 
     @Override
     public boolean isComplete(){
-        return getWarrior().getCoins() > 1;
+        boolean coinsCollected = getWarrior().getKey() > 0;
+        if (coinsCollected) {
+            gameMusic.stop();
+        }
+        return coinsCollected;
+
+
 
     }
+
+    public void stopMusic() {
+        if (gameMusic != null) {
+            gameMusic.stop();
+        }
+
+    }
+
 
 
 }

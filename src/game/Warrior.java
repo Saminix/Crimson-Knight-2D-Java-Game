@@ -1,9 +1,11 @@
 package game;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
+import org.jbox2d.common.Vec2;
 
 
-import javax.swing.JOptionPane;
+
+
 
 
 
@@ -14,7 +16,14 @@ public class Warrior extends Walker {
 
     private int coins;
 
+    private WarriorController warriorController;
+
+    private int special;
+
     private int score;
+    private int key;
+
+
 
     //private GameView view;
 
@@ -34,6 +43,8 @@ public class Warrior extends Walker {
         this.coins = 0;
         this.score = 0;
         this.health = 100;
+        this.special = 1;
+        this.key = 0;
 
 
 
@@ -42,6 +53,24 @@ public class Warrior extends Walker {
 
     public void setCoins(int coins){
         this.coins = coins;
+    }
+
+
+    public void setWarriorController(WarriorController warriorController) {
+        this.warriorController = warriorController;
+    }
+
+
+    public void setSpecial(int special) {
+        this.special = special;
+        if (getSpecial() > 100){
+
+        }
+
+    }
+
+    public int getSpecial() {
+        return special;
     }
 
     public int getCoins() {
@@ -53,7 +82,8 @@ public class Warrior extends Walker {
         this.health = health;
         if ( this.health <= 0){
             this.destroy();
-            JOptionPane.showMessageDialog(null, "GAME OVER!");
+
+
         }
 
     }
@@ -62,13 +92,11 @@ public class Warrior extends Walker {
         return health;
     }
 
+
+
+
     public void setScore(int score){ this.score = score;}
 
-    public void attack(Enemy enemy) {
-             // or whatever value you want
-            enemy.TakenHit();
-
-    }
 
 
     public void ResetAttributes(){
@@ -79,16 +107,33 @@ public class Warrior extends Walker {
     }
 
 
+    public void setKey(int key) {
+        this.key = key;
+    }
 
+
+    public int getKey() {
+        return key;
+    }
 
     public int getScore() {
         return score;
     }
 
 
-
+    public boolean isFacingRight(){
+        return warriorController.isFacingRight();
+    }
 
 
 
 
 }
+
+
+
+
+
+
+
+

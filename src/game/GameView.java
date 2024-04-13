@@ -39,6 +39,7 @@ public class GameView extends UserView {
         drawCoinCount(g);
         drawScoreCount(g);
         drawControls(g);
+        drawSpecialPowerBar(g);
 
 
 
@@ -71,6 +72,31 @@ public class GameView extends UserView {
 
         g.setColor(Color.BLACK);
         g.drawRect(x ,y, healthBarWidth, healthBarHeight);
+
+    }
+
+
+
+
+    private void drawSpecialPowerBar(Graphics2D g){
+        int Health = warrior.getSpecial();
+        int maxPower = 150;
+        int BarPowerWidth = 190;
+        int BarPowerHeight = 10;
+        int x = 20;
+        int y = 25;
+
+        g.setColor(Color.GRAY);
+        g.fillRect(x,y,BarPowerWidth,BarPowerHeight);
+
+
+        int BarWidth = (int) ((double) Health / maxPower * BarPowerWidth);
+        g.setColor(Color.ORANGE);
+        g.fillRect(x,y, BarWidth,BarPowerHeight);
+
+
+        g.setColor(Color.BLACK);
+        g.drawRect(x ,y, BarWidth, BarPowerHeight);
 
     }
 
@@ -151,6 +177,9 @@ public class GameView extends UserView {
     }
 
 
+    public void updateWarriorInstance(Warrior warrior) {
+        this.warrior = warrior;
+    }
 
 
 
