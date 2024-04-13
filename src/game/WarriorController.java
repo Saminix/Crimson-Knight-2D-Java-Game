@@ -2,8 +2,11 @@ package game;
 import city.cs.engine.*;
 
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class WarriorController implements KeyListener {
     private Warrior warrior;
@@ -11,12 +14,30 @@ public class WarriorController implements KeyListener {
     private static final int jumpSpeed = 15;
     private static final float imageScale = 6.8f;
 
+
     private boolean isFacingRight = false;
+    private boolean isPlayingMovingAudio = false;
+    private boolean isPlayingJumpAudio = false;
+
+    private static SoundClip movingSound,jumpSound;
+
+    static {
+        try {
+            movingSound = new SoundClip("audio/footsteps.wav");
+            jumpSound = new SoundClip("audio/jump.wav");
+        } catch (UnsupportedAudioFileException|IOException|LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
 
     // in order to allow the player to move the character in the direction it is facing, to jump or run etc
 
     public WarriorController(Warrior warrior) {
         this.warrior = warrior;
+
+
+
+
 
 
 
@@ -70,6 +91,8 @@ public class WarriorController implements KeyListener {
     // method to position which direction the warrior stops in.
     private void setWarriorToStop() {
         warrior.stopWalking();
+        warriorMovementStopPlaying();
+        warriorJumpStopPlaying();
         warrior.removeAllImages();
         if (isFacingRight) {
             warrior.removeAllImages();
@@ -90,10 +113,14 @@ public class WarriorController implements KeyListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/warriorJumpLeft.gif", imageScale - 1));
         }
 
+        warriorJumpPlay();
+
+
     }
 
     private void setWarriorMove(){
         warrior.startWalking(walkSpeed);
+        warriorMovementPlay();
         warrior.removeAllImages();
         warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUN.gif", imageScale));
         isFacingRight = true;
@@ -102,6 +129,7 @@ public class WarriorController implements KeyListener {
 
     private void setWarriorMoveLeft(){
         warrior.startWalking(-walkSpeed);
+        warriorMovementPlay();
         warrior.removeAllImages();
         warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorRUNLeft.gif", imageScale));
         isFacingRight = false;
@@ -109,7 +137,7 @@ public class WarriorController implements KeyListener {
     }
 
 
-    private void attack() {
+    public void attack() {
 
         if (isFacingRight) {
             warrior.removeAllImages();
@@ -119,18 +147,44 @@ public class WarriorController implements KeyListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHitLeft.gif", imageScale));
         }
 
-        //try {
-        //AudioClip swordSlash = new AudioClip("data/Audio/swordSlash.wav");
-        //swordSlash.play();
-        //} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+
 
     }
 
 
-
-
     public void updateWarrior(Warrior newWarrior){
         warrior = newWarrior;
+    }
+
+
+    public void warriorMovementPlay(){
+        if(!isPlayingMovingAudio){
+            movingSound.play();
+            isPlayingMovingAudio = true;
+        }
+
+    }
+
+    public void warriorMovementStopPlaying(){
+        movingSound.stop();
+        isPlayingMovingAudio = false;
+    }
+
+    public void warriorJumpPlay(){
+        if(!isPlayingJumpAudio){
+            jumpSound.play();
+            isPlayingJumpAudio = true;
+        }
+
+    }
+
+    public void warriorJumpStopPlaying(){
+        jumpSound.stop();
+        isPlayingJumpAudio = false;
+    }
+
+    public boolean isFacingRight(){
+        return isFacingRight;
     }
 
 
