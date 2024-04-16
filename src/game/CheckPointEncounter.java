@@ -35,8 +35,7 @@ public class CheckPointEncounter  implements CollisionListener  {
         if (e.getOtherBody() instanceof CheckPoint){
             System.out.println("EndPoint Secured");
             if(level.isComplete()){
-                game.currentLevel.stop();
-                level.stopMusic();
+
                 game.disposeCurrentLevelFrame();
                 game.isNextLevel();
             }
