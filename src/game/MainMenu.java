@@ -114,7 +114,6 @@ public class MainMenu extends ControlPanel {
                 JOptionPane.showMessageDialog(content, "Controls: \n W - Jump \n A - Left \n D - Right \n Mouse click - Shoot");
             }
         });
-
         howToPlayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,16 +128,16 @@ public class MainMenu extends ControlPanel {
                         "Tip - Find The Mushrooms To Unlock Your Hidden Power!");
             }
         });
-
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    GameLevel level = GameSaverLoader.load(game, "save_game.txt");
+                    GameLevel level = GameLevel.loadLevel(game);
+
                     game.setLevel(level);
                     System.out.println("Game loaded successfully.");
-                    menu.dispose(); // Close the menu after loading
-                    game.startGame(); // Start the game
+                    menu.dispose();
+                    game.startGame();
                 } catch (IOException ex) {
                     System.out.println("Error loading game: " + ex.getMessage());
                 }
@@ -154,7 +153,6 @@ public class MainMenu extends ControlPanel {
 
         menu.setVisible(true);
     }
-
     /**
      * Returns whether the play button is pressed.
      *
