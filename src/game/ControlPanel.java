@@ -1,12 +1,23 @@
 package game;
 import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * Class Control Panel is a subclass of JPanel
  * Represents a control panel in the game
  * used to display game controls and information.
+ * The pause Button, QuitButton and the Next-level button
  */
 public class ControlPanel extends JPanel {
     private Game game;
+    private JButton pauseButton;
+
+    private JButton quitButton;
+
+    private JButton nextLevelButton;
+
     /**
      * Constructs a ControlPanel with the specified game instance.
      *
@@ -14,5 +25,41 @@ public class ControlPanel extends JPanel {
      */
     public ControlPanel(Game game) {
         this.game = game;
+        pauseButton = new JButton("Pause");
+        quitButton = new JButton("Quit");
+        nextLevelButton = new JButton("Next level ->");
+        pauseButton.addActionListener(new PauseButtonListener());
+
+        pauseButton.addActionListener(new PauseButtonListener());
+        quitButton.addActionListener(new QuitButtonListener());
+        nextLevelButton.addActionListener(new NextLevelButtonListener());
+
+        add(pauseButton);
+        add(quitButton);
+        add(nextLevelButton);
+    }
+
+    private class PauseButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            game.togglePause();
+        }
+    }
+
+    private class QuitButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit the game?", "Quit Game", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                System.exit(0); // Quit the game
+            }
+        }
+    }
+
+    private class NextLevelButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            game.goToNextLevel();
+        }
     }
 }
