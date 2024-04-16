@@ -166,7 +166,7 @@ public class Shoot implements MouseListener, CollisionListener {
         if (e.getOtherBody() instanceof Zombie) {
             ball.destroy();
             Enemy zombie = (Enemy) e.getOtherBody();
-            zombie.decrementHealth(14);
+            zombie.decrementHealth(7);
             zombie.TakenHit();
         }
         if (e.getOtherBody() instanceof PumpkinMan) {
@@ -191,6 +191,12 @@ public class Shoot implements MouseListener, CollisionListener {
             ball.destroy();
         }
         if (e.getOtherBody() instanceof Collectibles) {
+            ball.destroy();
+        }
+        if (e.getOtherBody() instanceof Warrior) {
+            ball.destroy();
+        }
+        if (e.getOtherBody() instanceof GroundPlatform) {
             ball.destroy();
         }
         if (e.getOtherBody() instanceof Rock) {
