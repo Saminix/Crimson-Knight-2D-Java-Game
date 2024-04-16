@@ -36,7 +36,7 @@ public class Point extends Collectibles {
 
     public Point(World world, float boxSizeWidth, float x, float y, float height){
         super(world, new CircleShape(boxSizeWidth), new Vec2(x,y), height);
-
+        height = 3;
         addImage(new BodyImage(imagePath, height));
     }
 
