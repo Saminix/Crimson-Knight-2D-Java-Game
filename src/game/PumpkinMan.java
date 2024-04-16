@@ -33,7 +33,7 @@ public class PumpkinMan extends Enemy implements StepListener {
 
     static {
         try {
-            snarlSound = new SoundClip("audio/GruntPumpkinMan.wav");
+            snarlSound = new SoundClip("audio/GruntMonster.wav");
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }
