@@ -12,6 +12,14 @@ import javax.swing.JFrame;
 
 public abstract class GameLevel extends World {
     protected Warrior warrior;
+
+
+    public abstract String getWarriorStats();
+
+    public abstract String getLevelName();
+
+    public abstract void setWarriorStats(String playerStats);
+
     private CheckPoint CheckPoint;
     public abstract void stopMusic();
     private Enemy enemy;
@@ -56,6 +64,9 @@ public abstract class GameLevel extends World {
     }
 
 
+
+
+
     /**
      * Gets the warrior Character for this level
      *
@@ -80,6 +91,15 @@ public abstract class GameLevel extends World {
     public int coins(){
         return getWarrior().getCoins();
     }
+
+
+    public String getWarriorStats() {
+        Warrior warrior = getWarrior();
+        return "Health:" + warrior.getHealth() + ",Score:" + warrior.getScore() + ",Coins:" + warrior.getCoins();
+    }
+
+
+
 
 
     /**

@@ -159,6 +159,17 @@ public class Warrior extends Walker {
 
 
 
+    public void setPlayerStats(String playerStats) {
+        // Implement the logic to set player stats for the warrior
+        // For example:
+        // Assuming playerStats is a string representation of the warrior's stats
+        // You can parse the string and set the warrior's stats accordingly
+        // For example:
+        // parsePlayerStats(playerStats);
+    }
+
+
+
 
 }
 

@@ -1,6 +1,7 @@
 package game;
 import city.cs.engine.*;
 
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -57,6 +58,15 @@ public class Game {
      * Creates the main menu and starts the game if the play button is pressed.
      */
     public Game() {
+
+        try {
+            gameMusic = new SoundClip("audio/GameMusic.wav");
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            System.out.println(e);
+
+        }
+        currentLevel = new Level1(this, "Level 1");
+
         MainMenu menu = new MainMenu(this);
         if (menu.IsPlayButtonPressed()) {
             System.out.println("button pressed");
@@ -71,7 +81,9 @@ public class Game {
      */
     public void startGame() {
 
-        currentLevel = new Level1(this, gameMusic);
+
+        playGameMusic();
+        currentLevel = new Level1(this, "Level1");
         try {
             gameMusic = new SoundClip("audio/GameMusic.wav");
             playGameMusic();
@@ -110,6 +122,13 @@ public class Game {
 
         ControlPanel controlPanel = new ControlPanel(this);
         frame.add(controlPanel, BorderLayout.SOUTH);
+
+
+        try {
+            GameSaverLoader.save(currentLevel, "initial_game_state.txt");
+        } catch (IOException ex) {
+            System.out.println("Error saving initial game state: " + ex.getMessage());
+        }
 
 
 
@@ -164,7 +183,15 @@ public class Game {
             totalCoins += oldWarrior.getCoins();
             totalScore += oldWarrior.getScore();
 
-            currentLevel = new Level2(this);
+
+            try {
+                GameSaverLoader.save(currentLevel, "saved_game_state.txt");
+            } catch (IOException ex) {
+                System.out.println("Error saving game state: " + ex.getMessage());
+            }
+
+
+            currentLevel = new Level2(this, "Level2");
             Warrior newWarrior = currentLevel.getWarrior();
             newWarrior.setSpecial(oldWarrior.getSpecial());
 
@@ -274,7 +301,13 @@ public class Game {
      */
     public static void main(String[] args) {
 
-        new Game();
+        Game game = new Game(); // Create a Game object
+        try {
+            GameLevel level = GameSaverLoader.load(game, "save_game.txt");
+            game.setLevel(level);
+        } catch (IOException e) {
+            System.out.println("Error loading game: " + e.getMessage());
+        }
     }
 
     /**
@@ -288,6 +321,13 @@ public class Game {
 
     public void setGameMusic(SoundClip gameMusic) {
         this.gameMusic = gameMusic;
+    }
+
+
+
+
+    public GameLevel getCurrentLevel() {
+        return currentLevel;
     }
 
 
@@ -320,6 +360,11 @@ public class Game {
                 gameMusicLevel3.resume();// Resume the game music
             }
         }
+    }
+
+
+    public void setLevel(GameLevel level) {
+        this.currentLevel = level;
     }
 
     public void showGameOver(){

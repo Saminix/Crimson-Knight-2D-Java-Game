@@ -26,7 +26,7 @@ public class Level2 extends GameLevel{
      * @param game The game object associated with this level.
      */
 
-    public Level2(Game game){
+    public Level2(Game game, String warriorStats){
         super(game);
 
 
@@ -197,6 +197,11 @@ public class Level2 extends GameLevel{
      */
 
     @Override
+    public String getLevelName() {
+        return "Level2";
+    }
+
+    @Override
     public boolean isComplete() {
         boolean keyCollected = getWarrior().getKey() > 0;
         if (keyCollected) {
@@ -211,5 +216,21 @@ public class Level2 extends GameLevel{
     public void stopMusic() {
 
     }
+
+
+    @Override
+    public String getPlayerStats() {
+        // Implement the logic to get player stats for Level1
+        // For example:
+        return getWarriorStats();
+    }
+
+    @Override
+    public void setPlayerStats(String playerStats) {
+        // Implement the logic to set player stats for Level1
+        // For example:
+        getWarrior().setPlayerStats(playerStats);
+    }
+
 }
 

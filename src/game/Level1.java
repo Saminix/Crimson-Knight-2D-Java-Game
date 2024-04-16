@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class Level1 extends GameLevel{
 
-    private SoundClip gameMusic;
 
     /**
      * Constructs the Level1 object.
@@ -24,9 +23,9 @@ public class Level1 extends GameLevel{
      */
 
 
-    public Level1(Game game, SoundClip gameMusic){
+    public Level1(Game game, String warriorStats){
         super(game);
-        this.gameMusic = gameMusic;
+
 
 
         Vec2 monsterPosition = new Vec2(-15, -18.5f);
@@ -241,14 +240,30 @@ public class Level1 extends GameLevel{
 
     }
 
+    @Override
+    public String getLevelName() {
+        return "Level1";
+    }
+
     /**
      * Stops the background music for the level.
      */
     public void stopMusic() {
-        if (gameMusic != null) {
-            gameMusic.stop();
-        }
 
+    }
+
+    @Override
+    public String getWarriorStats() {
+        // Implement the logic to get player stats for Level1
+        // For example:
+        return getWarriorStats();
+    }
+
+    @Override
+    public void setWarriorStats(String playerStats) {
+        // Implement the logic to set player stats for Level1
+        // For example:
+        getWarrior().setPlayerStats(playerStats);
     }
 
 

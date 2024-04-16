@@ -242,6 +242,11 @@ public class Level3 extends GameLevel{
 
     }
 
+    @Override
+    public String getLevelName() {
+        return "Level3";
+    }
+
     /**
      * Stops the background music for the level.
      */
@@ -252,6 +257,20 @@ public class Level3 extends GameLevel{
         }
 
     }
+
+    @Override
+    public String getPlayerStats() {
+        // Implement the logic to get player stats for Level1
+        // For example:
+        return getWarriorStats();
+    }
+
+    @Override
+    public void setPlayerStats(String playerStats) {
+        // Implement the logic to set player stats for Leve
+        getWarrior().setPlayerStats(playerStats);
+    }
+
 
 
 }

@@ -159,6 +159,12 @@ public class Level4 extends GameLevel{
      * @return true if the key is collected, indicating level completion, else false,
      */
 
+
+    @Override
+    public String getLevelName() {
+        return "Level4";
+    }
+
     @Override
     public boolean isComplete() {
         boolean keyCollected = getWarrior().getKey() > 0;
@@ -176,5 +182,20 @@ public class Level4 extends GameLevel{
 
 
     }
+
+    @Override
+    public String getPlayerStats() {
+        // Implement the logic to get player stats for Level1
+        // For example:
+        return getWarriorStats();
+    }
+
+    @Override
+    public void setPlayerStats(String playerStats) {
+        // Implement the logic to set player stats for Level1
+        // For example:
+        getWarrior().setPlayerStats(playerStats);
+    }
+
 }
 

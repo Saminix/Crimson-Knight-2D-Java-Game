@@ -3,12 +3,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
 
 /**
  * Represents the main menu panel displayed at the start of the game.
  */
-
 public class MainMenu extends ControlPanel {
     private boolean isPressed;
     private boolean isControlsPressed;
@@ -19,7 +18,6 @@ public class MainMenu extends ControlPanel {
      *
      * @param game The game instance.
      */
-
     public MainMenu(Game game) {
         super(game);
         this.isPressed = false;
@@ -30,13 +28,6 @@ public class MainMenu extends ControlPanel {
         JFrame menu = new JFrame("Menu");
 
         // Main content panel with background image
-
-        /**
-         * A Protected Panel, Inherited by Subclasses to Paint the Background
-         * Main menu.
-         * Panel Consists of Buttons, Positions and sizes.
-         *
-         */
         JPanel content = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -54,44 +45,72 @@ public class MainMenu extends ControlPanel {
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setLocationRelativeTo(null);
 
-        JLabel titleLabel = new JLabel("Crimson Knight");
-        titleLabel.setFont(new Font("Kalam", Font.BOLD, 40));
+        JLabel titleLabel = new JLabel(" CRIMSON GHOST ");
+        titleLabel.setFont(new Font("Kalam", Font.BOLD, 50));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         GridBagConstraints titleConstraints = new GridBagConstraints();
         titleConstraints.gridx = 0;
         titleConstraints.gridy = 0;
-        titleConstraints.insets = new Insets(0, 0, 100, 0); // Add some spacing below the title
+        titleConstraints.insets = new Insets(0, 0, 50, 0); // Add some spacing below the title
         content.add(titleLabel, titleConstraints);
 
+        // Set preferred size for the buttons
+        Dimension buttonSize = new Dimension(200, 40); // Adjust the size as needed
+
+        // Create buttons
         JButton playButton = new JButton("Play Game");
         JButton controlsButton = new JButton("Controls");
         JButton howToPlayButton = new JButton("How To Play?");
+        JButton loadButton = new JButton("Load Game");
         JButton quitButton = new JButton("Quit Game");
 
-        Dimension buttonSize = new Dimension(200, 40);
+        // Set preferred size for the buttons
         playButton.setPreferredSize(buttonSize);
         controlsButton.setPreferredSize(buttonSize);
-        quitButton.setPreferredSize(buttonSize);
         howToPlayButton.setPreferredSize(buttonSize);
+        loadButton.setPreferredSize(buttonSize);
+        quitButton.setPreferredSize(buttonSize);
+
+        // Create a panel to contain the buttons
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setOpaque(false); // Make the button panel transparent
+
+        // Create constraints for centering the buttons
+        GridBagConstraints buttonConstraints = new GridBagConstraints();
+        buttonConstraints.gridx = 0;
+        buttonConstraints.gridy = GridBagConstraints.RELATIVE;
+        buttonConstraints.anchor = GridBagConstraints.CENTER;
+        buttonConstraints.insets = new Insets(10, 0, 10, 0); // Add spacing between buttons
+
+        // Add buttons to the button panel
+        buttonPanel.add(playButton, buttonConstraints);
+        buttonPanel.add(controlsButton, buttonConstraints);
+        buttonPanel.add(howToPlayButton, buttonConstraints);
+        buttonPanel.add(loadButton, buttonConstraints);
+        buttonPanel.add(quitButton, buttonConstraints);
+
+        // Add the button panel to the content panel
+        GridBagConstraints contentConstraints = new GridBagConstraints();
+        contentConstraints.gridx = 0;
+        contentConstraints.gridy = 1;
+        contentConstraints.anchor = GridBagConstraints.CENTER;
+        contentConstraints.insets = new Insets(0, 0, 20, 0); // Add some spacing above the buttons
+        content.add(buttonPanel, contentConstraints);
 
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Set isPressed to true when the play button is pressed
                 isPressed = true;
                 game.startGame();
-                ((JFrame) SwingUtilities.getWindowAncestor(content)).dispose();
-
+                menu.dispose();
             }
         });
 
         controlsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Set isControlsPressed to true when the controls button is pressed
                 isControlsPressed = true;
-                // Show controls instructions (e.g., in a dialog box)
                 JOptionPane.showMessageDialog(content, "Controls: \n W - Jump \n A - Left \n D - Right \n Mouse click - Shoot");
             }
         });
@@ -99,9 +118,7 @@ public class MainMenu extends ControlPanel {
         howToPlayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Set isControlsPressed to true when the controls button is pressed
                 isControlsPressed = true;
-                // Show controls instructions (e.g., in a dialog box)
                 JOptionPane.showMessageDialog(content, "How to play?\n" +
                         "The Goal Is To Complete The Levels By Finding The Magic Key To Unlock The Door\n" +
                         "Hidden Somewhere Within The Game. The Only Way To Go To The Next Level Is To Find It.\n" +
@@ -113,27 +130,27 @@ public class MainMenu extends ControlPanel {
             }
         });
 
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    GameLevel level = GameSaverLoader.load(game, "save_game.txt");
+                    game.setLevel(level);
+                    System.out.println("Game loaded successfully.");
+                    menu.dispose(); // Close the menu after loading
+                    game.startGame(); // Start the game
+                } catch (IOException ex) {
+                    System.out.println("Error loading game: " + ex.getMessage());
+                }
+            }
+        });
 
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Quit the game when the quit button is pressed
                 System.exit(0);
             }
         });
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 1, 0, 10)); // GridLayout for vertical alignment
-        buttonPanel.setOpaque(false); // Make the button panel transparent
-        buttonPanel.add(playButton);
-        buttonPanel.add(controlsButton);
-        buttonPanel.add(howToPlayButton);
-        buttonPanel.add(quitButton);
-        GridBagConstraints buttonConstraints = new GridBagConstraints();
-        buttonConstraints.gridx = 0;
-        buttonConstraints.gridy = 1;
-        buttonConstraints.insets = new Insets(0, 0, 20, 0); // Add some spacing above the buttons
-        content.add(buttonPanel, buttonConstraints);
 
         menu.setVisible(true);
     }
@@ -155,7 +172,4 @@ public class MainMenu extends ControlPanel {
     public boolean isControlsButtonPressed() {
         return isControlsPressed;
     }
-
-
-
 }
