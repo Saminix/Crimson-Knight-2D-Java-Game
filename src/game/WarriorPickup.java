@@ -2,11 +2,16 @@ package game;
 
 import city.cs.engine.CollisionListener;
 import city.cs.engine.CollisionEvent;
-
+/**
+ * Collision listener class for handling pickup interactions with the warrior.
+ */
 public class WarriorPickup implements CollisionListener {
     private Warrior warrior;
 
-
+    /**
+     * Constructs a WarriorPickup object.
+     * @param warrior The warrior object to be affected by pickups.
+     */
 
     public WarriorPickup(Warrior warrior) {
         this.warrior = warrior;
@@ -33,7 +38,7 @@ public class WarriorPickup implements CollisionListener {
             e.getOtherBody().destroy();
         }
         else if (e.getOtherBody() instanceof Mushrooms){
-            int collectedMushroom = ((Mushrooms) e.getOtherBody()).collectItem(50);
+            int collectedMushroom = ((Mushrooms) e.getOtherBody()).collectItem(1);
             warrior.setSpecial(warrior.getSpecial() + collectedMushroom);
             e.getOtherBody().destroy();
         } else if (e.getOtherBody() instanceof Potion) {

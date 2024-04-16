@@ -1,5 +1,4 @@
 package game;
-
 import city.cs.engine.SoundClip;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -9,13 +8,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * Represents a control panel displayed when the Warrior Dies, GameOver!
+ * This class extends ControlPanel and provides a menu showing restart Game and
+ * Quit Game Button.
+ */
 public class GameOver extends ControlPanel {
-
     private boolean isPressed;
     private Game game;
-
     private SoundClip gameMusic;
+
+    /**
+     * Constucts a GameOver Panel in the game.
+     *
+     * @param game the Game instance associated with this control panel.
+     */
+
     public GameOver(Game game) {
         super(game);
         this.isPressed = false;
@@ -27,9 +35,13 @@ public class GameOver extends ControlPanel {
         }catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }
-
-
         JFrame menu = new JFrame("Menu");
+
+        /**
+         * A Protected Panel, Inherited by Subclasses to Paint the Background Game
+         * Completed.
+         * Panel Consists of Buttons, Positions and sizes.
+         */
 
         // Main content panel with background image
         JPanel content = new JPanel() {
@@ -65,7 +77,6 @@ public class GameOver extends ControlPanel {
                 game.startGame();
                 stopGameMusic();
                 ((JFrame) SwingUtilities.getWindowAncestor(content)).dispose();
-
 
             }
         });

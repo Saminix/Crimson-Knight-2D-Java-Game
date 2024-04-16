@@ -8,12 +8,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+
+/**
+ * A Warrior Controller class for managing user input and controlling the warrior character.
+ */
+
 public class WarriorController implements KeyListener {
     private Warrior warrior;
     private static final int walkSpeed = 10;
     private static final int jumpSpeed = 15;
     private static final float imageScale = 6.8f;
-
+    private PowerBlast powerBlast;
 
     private boolean isFacingRight = false;
     private boolean isPlayingMovingAudio = false;
@@ -32,15 +37,13 @@ public class WarriorController implements KeyListener {
 
     // in order to allow the player to move the character in the direction it is facing, to jump or run etc
 
+
+    /**
+     * Constructs a WarriorController object.
+     * @param warrior The warrior object to be controlled.
+     */
     public WarriorController(Warrior warrior) {
         this.warrior = warrior;
-
-
-
-
-
-
-
 
     }
 
@@ -61,8 +64,6 @@ public class WarriorController implements KeyListener {
 
         } else if (code == KeyEvent.VK_W) {
             setWarriorJump();
-
-
         } else if (code == KeyEvent.VK_M){
             attack();
 
@@ -89,6 +90,10 @@ public class WarriorController implements KeyListener {
     }
 
     // method to position which direction the warrior stops in.
+
+    /**
+     * Positions the warrior to stop moving.
+     */
     private void setWarriorToStop() {
         warrior.stopWalking();
         warriorMovementStopPlaying();
@@ -102,6 +107,11 @@ public class WarriorController implements KeyListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorStopLeft.gif", imageScale));
         }
     }
+
+
+    /**
+     * Initiates the warrior's jump action.
+     */
 
     private void setWarriorJump(){
         warrior.jump(jumpSpeed);
@@ -118,6 +128,10 @@ public class WarriorController implements KeyListener {
 
     }
 
+    /**
+     * Initiates the warrior's move action to the right.
+     */
+
     private void setWarriorMove(){
         warrior.startWalking(walkSpeed);
         warriorMovementPlay();
@@ -126,6 +140,10 @@ public class WarriorController implements KeyListener {
         isFacingRight = true;
 
     }
+
+    /**
+     * Initiates the warrior's move action to the left.
+     */
 
     private void setWarriorMoveLeft(){
         warrior.startWalking(-walkSpeed);
@@ -136,6 +154,9 @@ public class WarriorController implements KeyListener {
 
     }
 
+    /**
+     * Initiates the warrior's attack action.
+     */
 
     public void attack() {
 
@@ -147,16 +168,22 @@ public class WarriorController implements KeyListener {
             warrior.addImage(new BodyImage("data/HoodedCharacter/HWarriorHitLeft.gif", imageScale));
         }
 
-
-
     }
 
 
+    /**
+     * Updates the warrior controlled by this controller.
+     * @param newWarrior The new warrior object to be controlled.
+     */
     public void updateWarrior(Warrior newWarrior){
         warrior = newWarrior;
     }
 
 
+
+    /**
+     * Plays the sound effect for warrior movement.
+     */
     public void warriorMovementPlay(){
         if(!isPlayingMovingAudio){
             movingSound.play();
@@ -165,11 +192,18 @@ public class WarriorController implements KeyListener {
 
     }
 
+    /**
+     * Stops playing the sound effect for warrior movement.
+     */
+
     public void warriorMovementStopPlaying(){
         movingSound.stop();
         isPlayingMovingAudio = false;
     }
 
+    /**
+     * Plays the sound effect for warrior jump.
+     */
     public void warriorJumpPlay(){
         if(!isPlayingJumpAudio){
             jumpSound.play();
@@ -177,7 +211,9 @@ public class WarriorController implements KeyListener {
         }
 
     }
-
+    /**
+     * Stops playing the sound effect for warrior jump.
+     */
     public void warriorJumpStopPlaying(){
         jumpSound.stop();
         isPlayingJumpAudio = false;

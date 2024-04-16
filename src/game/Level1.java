@@ -1,5 +1,5 @@
 package game;
-
+import city.cs.engine.BoxShape;
 import city.cs.engine.SoundClip;
 import org.jbox2d.common.Vec2;
 
@@ -8,9 +8,20 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class Level1 is a subclass of GameLevel
+ * Represent Level1 of the game.
+ */
+
 public class Level1 extends GameLevel{
+
     private SoundClip gameMusic;
 
+    /**
+     * Constructs the Level1 object.
+     *
+     * @param game The game object associated with this level.
+     */
 
 
     public Level1(Game game){
@@ -25,8 +36,6 @@ public class Level1 extends GameLevel{
         }
 
 
-
-
         Vec2 monsterPosition = new Vec2(-15, -18.5f);
         Monster monster = new Monster(this, monsterPosition,45,0.12f);
 
@@ -39,13 +48,11 @@ public class Level1 extends GameLevel{
 
         Key key = new Key(this,2,55,2,3);
 
-        BoxCrate wall = new BoxCrate(this);
+
+        Obstacle wall = new Obstacle(this,new BoxShape(2,2),"data/box.png",-200,-18.5f,5);
         wall.setPosition(new Vec2(-200,-18.5f));
 
         Mushrooms mushrooms = new Mushrooms(this,1.5f,132.5f,-15.6f,3);
-
-
-
 
         //Using a ForLoop to create 4 box crates at different x coordinate intervals
         float boxX = -165;
@@ -53,23 +60,24 @@ public class Level1 extends GameLevel{
 
         int BoxS = 4;
         for(int i = 0; i < BoxS; i++){
-            BoxCrate box = new BoxCrate(this);
+            Obstacle box = new Obstacle(this,new BoxShape(2,2),"data/box.png",boxX,boxY,5);
             box.setPosition(new Vec2(boxX, boxY));
             boxX+=37;
 
         }
 
-        ArrayList<BoxCrate> boxsList = new ArrayList<>();
+        ArrayList<Obstacle> boxsList = new ArrayList<>();
 
-        BoxCrate box1 = new BoxCrate(this);
+
+        Obstacle box1 = new Obstacle(this,new BoxShape(2,2),"data/box.png",-124.1f, -18.5f,5);
         box1.setPosition(new Vec2(-124.1f, -18.5f));
         boxsList.add(box1);
 
-        BoxCrate box2 = new BoxCrate(this);
+        Obstacle box2 = new Obstacle(this,new BoxShape(2,2),"data/box.png",-124.1f, -14.5f,5);
         box2.setPosition(new Vec2(-124.1f, -14.5f));
         boxsList.add(box2);
 
-        BoxCrate box3 = new BoxCrate(this);
+        Obstacle box3 = new Obstacle(this,new BoxShape(2,2),"data/box.png",-124.1f, -14.5f,5);
         box3.setPosition(new Vec2(-124.1f, -14.5f));
         boxsList.add(box3);
 
@@ -81,26 +89,26 @@ public class Level1 extends GameLevel{
 
         int BoxxS = 3;
         for(int i = 0; i < BoxxS; i++){
-            BoxCrate box4 = new BoxCrate(this);
+            Obstacle box4 = new Obstacle(this,new BoxShape(2,2),"data/box.png",box2X, box2Y,5);
             box4.setPosition(new Vec2(box2X, box2Y));
             box2Y+=4.5;
 
         }
 
 
-        BoxCrate box5 = new BoxCrate(this);
+        Obstacle box5 = new Obstacle(this,new BoxShape(2,2),"data/box.png",-87, -18.5f,5);
         box5.setPosition(new Vec2(-87, -18.5f));
         boxsList.add(box5);
 
-        BoxCrate box6 = new BoxCrate(this);
+        Obstacle box6 = new Obstacle(this,new BoxShape(2,2),"data/box.png",-87, -14.5f,5);
         box6.setPosition(new Vec2(-87, -14.5f));
         boxsList.add(box6);
 
-        BoxCrate box7 = new BoxCrate(this);
+        Obstacle box7 = new Obstacle(this,new BoxShape(2,2),"data/box.png",-78.5f, -18.5f,5);
         box7.setPosition(new Vec2(-78.5f, -18.5f));
         boxsList.add(box7);
 
-        BoxCrate box8 = new BoxCrate(this);
+        Obstacle box8 = new Obstacle(this,new BoxShape(2,2),"data/box.png",103.9f, -17.5f,5);
         box8.setPosition(new Vec2(103.9f, -17.5f));
         boxsList.add(box8);
 
@@ -158,14 +166,14 @@ public class Level1 extends GameLevel{
                 12.5f,1f,51,-2,  "data/grassplatform.png", 6 );
 
         //create trampoline platform
-        Vec2 trampolinePosition = new Vec2(31, -11);
-        Trampoline trampoline = new Trampoline(this, trampolinePosition, 10,0.08f,2);
+        Vec2 trampolinePosition = new Vec2(31, -9);
+        Trampoline trampoline = new Trampoline(this,  trampolinePosition, 5.5f,0.05f,"data/movingGrassPlatform.png", 2.5f,0.2f,4.5f,0);
 
         Vec2 trampolinePosition1 = new Vec2(42, -17);
-        Trampoline trampoline1 = new Trampoline(this, trampolinePosition1, 5,0.08f,2);
+        Trampoline trampoline1 = new Trampoline(this, trampolinePosition1, 4.5f,0.05f,"data/movingGrassPlatform.png", 2.5f,0.2f,4.5f,0);
 
         Vec2 trampolinePosition2 = new Vec2(5, -17);
-        Trampoline trampoline2 = new Trampoline(this, trampolinePosition2, 10,0.04f,2);
+        Trampoline trampoline2 = new Trampoline(this, trampolinePosition2, 4.5f,0.04f,"data/movingGrassPlatform.png", 2.5f,0.2f,4.5f,0);
 
 
         //using for-loop to add 10 coins to the game world along intervals of x,
@@ -187,14 +195,7 @@ public class Level1 extends GameLevel{
         coinsList.add(new Coins(this, 0.8f, 61f, -10f, 6));
 
 
-
-
-
-
-
         //create other instances from other classes
-
-
         Treasure treasure1 = new Treasure(this, 2, 2,65f,-11f,5);
 
 
@@ -225,25 +226,32 @@ public class Level1 extends GameLevel{
 
 
 
-
-
-
-
     }
+
+
+
+    /**
+     * Checks if the level is complete.
+     *
+     * @return true if the key is collected, indicating level completion, else false,
+     */
 
 
     @Override
     public boolean isComplete(){
-        boolean coinsCollected = getWarrior().getKey() > 0;
-        if (coinsCollected) {
+        boolean keyCollected = getWarrior().getKey() > 0;
+        if (keyCollected) {
             gameMusic.stop();
         }
-        return coinsCollected;
+        return keyCollected;
 
 
 
     }
 
+    /**
+     * Stops the background music for the level.
+     */
     public void stopMusic() {
         if (gameMusic != null) {
             gameMusic.stop();
