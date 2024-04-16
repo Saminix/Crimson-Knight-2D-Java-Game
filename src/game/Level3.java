@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class Level3 extends GameLevel{
-    private SoundClip gameMusic;
+    private SoundClip gameMusicLevel3;
 
 
     /**
@@ -24,16 +24,9 @@ public class Level3 extends GameLevel{
      */
 
 
-    public Level3(Game game){
+    public Level3(Game game, SoundClip gameMusicLevel3){
         super(game);
-
-        try {
-            gameMusic = new SoundClip("audio/ScaryMusic.wav");
-            gameMusic.setVolume(0.3);
-            gameMusic.loop();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println(e);
-        }
+        this.gameMusicLevel3 = gameMusicLevel3;
 
 
         //add a checkpoint towards the end of the game(just image)
@@ -244,7 +237,6 @@ public class Level3 extends GameLevel{
     public boolean isComplete(){
         boolean keyCollected = getWarrior().getKey() > 0;
         if (keyCollected) {
-            gameMusic.stop();
         }
         return keyCollected;
 
@@ -255,8 +247,8 @@ public class Level3 extends GameLevel{
      */
 
     public void stopMusic() {
-        if (gameMusic != null) {
-            gameMusic.stop();
+        if (gameMusicLevel3 != null) {
+            gameMusicLevel3.stop();
         }
 
     }

@@ -24,16 +24,9 @@ public class Level1 extends GameLevel{
      */
 
 
-    public Level1(Game game){
+    public Level1(Game game, SoundClip gameMusic){
         super(game);
-
-        try {
-            gameMusic = new SoundClip("audio/GameMusic.wav");
-            gameMusic.setVolume(0.3);
-            gameMusic.loop();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println(e);
-        }
+        this.gameMusic = gameMusic;
 
 
         Vec2 monsterPosition = new Vec2(-15, -18.5f);
@@ -241,7 +234,6 @@ public class Level1 extends GameLevel{
     public boolean isComplete(){
         boolean keyCollected = getWarrior().getKey() > 0;
         if (keyCollected) {
-            gameMusic.stop();
         }
         return keyCollected;
 

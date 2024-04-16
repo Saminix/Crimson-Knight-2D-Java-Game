@@ -1,9 +1,7 @@
 package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +10,6 @@ import java.util.ArrayList;
  */
 
 public class Level4 extends GameLevel{
-    private SoundClip gameMusic;
 
     /**
      * Constructs the Level4 object.
@@ -23,13 +20,7 @@ public class Level4 extends GameLevel{
     public Level4(Game game){
         super(game);
 
-        try {
-            gameMusic = new SoundClip("audio/GameMusic.wav");
-            gameMusic.setVolume(0.1);
-            gameMusic.play();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println(e);
-        }
+
 
 
         getWarrior().setPosition(new Vec2(-10, 1));
@@ -172,7 +163,6 @@ public class Level4 extends GameLevel{
     public boolean isComplete() {
         boolean keyCollected = getWarrior().getKey() > 0;
         if (keyCollected) {
-            gameMusic.stop();
         }
         return keyCollected;
 
@@ -183,9 +173,7 @@ public class Level4 extends GameLevel{
      */
 
     public void stopMusic() {
-        if (gameMusic != null) {
-            gameMusic.stop();
-        }
+
 
     }
 }

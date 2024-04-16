@@ -19,7 +19,6 @@ import java.util.ArrayList;
  */
 
 public class Level2 extends GameLevel{
-    private SoundClip gameMusic;
 
     /**
      * Constructs the Level2 object.
@@ -29,16 +28,6 @@ public class Level2 extends GameLevel{
 
     public Level2(Game game){
         super(game);
-
-
-
-        try {
-            gameMusic = new SoundClip("audio/GameMusic.wav");
-            gameMusic.setVolume(0.1);
-            gameMusic.play();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println(e);
-        }
 
 
         Rock Boulder1 = new Rock(this,4f,-34,-8f,20f);
@@ -211,7 +200,6 @@ public class Level2 extends GameLevel{
     public boolean isComplete() {
         boolean keyCollected = getWarrior().getKey() > 0;
         if (keyCollected) {
-            gameMusic.stop();
         }
         return keyCollected;
 
@@ -221,9 +209,6 @@ public class Level2 extends GameLevel{
      * Stops the background music for the level.
      */
     public void stopMusic() {
-        if (gameMusic != null) {
-            gameMusic.stop();
-        }
 
     }
 }
