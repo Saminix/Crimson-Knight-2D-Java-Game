@@ -1,6 +1,11 @@
 package game;
 import city.cs.engine.*;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 /**
  * My Game Main Entry Point.
@@ -32,9 +37,16 @@ public class Game {
     // Total score accumulated in the game
     private int totalScore = 0;
 
+    private boolean isPaused = false;
 
     WarriorController controller;
     // Controller for the game's warrior
+    private SoundClip gameMusic;
+
+    private SoundClip gameMusicLevel3;
+
+
+
 
     Warrior warrior;
     // Reference to the game's warrior
@@ -52,15 +64,25 @@ public class Game {
         }
     }
 
+
+
     /**
      * Method to Initialise and start the Game
      */
     public void startGame() {
 
-        currentLevel = new Level1(this);
+        currentLevel = new Level1(this, gameMusic);
+        try {
+            gameMusic = new SoundClip("audio/GameMusic.wav");
+            playGameMusic();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
         warrior = currentLevel.getWarrior();
         this.isLastLevel = false;
         view = new GameView(currentLevel, 800, 600, "data/ForestBackGround.jpg");
+
+
 
         controller = new WarriorController(currentLevel.getWarrior());
         view.addKeyListener(controller);
@@ -85,6 +107,10 @@ public class Game {
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+
+        ControlPanel controlPanel = new ControlPanel(this);
+        frame.add(controlPanel, BorderLayout.SOUTH);
+
 
 
         // Start the game world simulation
@@ -161,15 +187,25 @@ public class Game {
 
         } else if (currentLevel instanceof Level2) {
             System.out.println("Level 3 Initiated");
+            stopGameMusic();
             currentLevel.stop();
-
             Warrior oldWarrior = currentLevel.getWarrior();
 
             //get whole score for level
             totalCoins += oldWarrior.getCoins();
             totalScore += oldWarrior.getScore();
 
-            currentLevel = new Level3(this);
+
+            currentLevel = new Level3(this, gameMusicLevel3);
+
+            try {
+                gameMusicLevel3 = new SoundClip("audio/ScaryMusic.wav");
+                gameMusicLevel3.setVolume(0.3);
+                gameMusicLevel3.loop();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                System.out.println(e);
+            }
+
             Warrior newWarrior = currentLevel.getWarrior();
             newWarrior.setSpecial(oldWarrior.getSpecial());
 
@@ -190,11 +226,11 @@ public class Game {
             currentLevel.getWarrior().ResetAttributes();
             currentLevel.start();
         } else if (currentLevel instanceof Level3) {
-
+            gameMusicLevel3.stop();
             System.out.println("Level 4 Initiated");
             currentLevel.stop();
 
-
+            playGameMusic();
             Warrior oldWarrior = currentLevel.getWarrior();
 
             totalCoins += oldWarrior.getCoins();
@@ -224,6 +260,7 @@ public class Game {
 
         }else if (currentLevel instanceof Level4) {
             setLastLevel(true);
+            stopGameMusic();
             currentLevel.stop();
             disposeCurrentLevelFrame();
             GameComplete panel = new GameComplete(this, totalCoins,totalScore);
@@ -246,6 +283,42 @@ public class Game {
     public void disposeCurrentLevelFrame() {
         if (frame != null) {
             frame.dispose();
+        }
+    }
+
+    public void setGameMusic(SoundClip gameMusic) {
+        this.gameMusic = gameMusic;
+    }
+
+
+    public void stopGameMusic(){
+        gameMusic.stop();
+    }
+
+    public void playGameMusic(){
+        gameMusic.setVolume(0.3);
+        gameMusic.loop();
+    }
+
+
+    /**
+     * Method to toggle the pause state of the game.
+     */
+    public void togglePause() {
+        isPaused = !isPaused; // Toggle pause state
+
+        if (isPaused) {
+            currentLevel.stop(); // Stop the game simulation if paused
+            if (gameMusic != null || gameMusicLevel3 !=null) {
+                gameMusic.pause();// Pause the game music
+                gameMusicLevel3.pause();
+            }
+        } else {
+            currentLevel.start(); // Start or resume the game simulation if unpaused
+            if (gameMusic != null || gameMusicLevel3 !=null) {
+                gameMusic.resume();
+                gameMusicLevel3.resume();// Resume the game music
+            }
         }
     }
 
