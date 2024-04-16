@@ -23,7 +23,7 @@ public class Level1 extends GameLevel{
      */
 
 
-    public Level1(Game game, String warriorStats){
+    public Level1(Game game, String playerStats){
         super(game);
 
 
@@ -240,6 +240,12 @@ public class Level1 extends GameLevel{
 
     }
 
+
+    /**
+     * Returns the name of the current level.
+     *
+     * @return A string representing the name of the current level.
+     */
     @Override
     public String getLevelName() {
         return "Level1";
@@ -247,22 +253,34 @@ public class Level1 extends GameLevel{
 
     /**
      * Stops the background music for the level.
+     * This method is responsible for stopping any ongoing background music
+     * that may be playing during the level.
      */
     public void stopMusic() {
 
     }
 
+
+    /**
+     * Retrieves the statistics of the player (Warrior) for this level.
+     *
+     * @return A string containing the player's health, score, and coins.
+     */
     @Override
-    public String getWarriorStats() {
-        // Implement the logic to get player stats for Level1
-        // For example:
-        return getWarriorStats();
+    public String getPlayerStats() {
+        Warrior warrior = getWarrior();
+        return "Health:" + warrior.getHealth() + ",Score:" + warrior.getScore() + ",Coins:" + warrior.getCoins();
     }
 
+
+    /**
+     * Sets the statistics of the player (Warrior) for this level.
+     *
+     * @param playerStats A string containing the player's health, score, and coins.
+     */
+
     @Override
-    public void setWarriorStats(String playerStats) {
-        // Implement the logic to set player stats for Level1
-        // For example:
+    public void setPlayerStats(String playerStats) {
         getWarrior().setPlayerStats(playerStats);
     }
 

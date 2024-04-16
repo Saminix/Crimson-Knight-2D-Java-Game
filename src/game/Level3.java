@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class Level3 extends GameLevel{
-    private SoundClip gameMusicLevel3;
+
 
 
     /**
@@ -24,9 +24,9 @@ public class Level3 extends GameLevel{
      */
 
 
-    public Level3(Game game, SoundClip gameMusicLevel3){
+    public Level3(Game game,String playerStats){
         super(game);
-        this.gameMusicLevel3 = gameMusicLevel3;
+
 
 
         //add a checkpoint towards the end of the game(just image)
@@ -242,6 +242,12 @@ public class Level3 extends GameLevel{
 
     }
 
+    /**
+     * Returns the name of the current level.
+     *
+     * @return A string representing the name of the current level.
+     */
+
     @Override
     public String getLevelName() {
         return "Level3";
@@ -249,28 +255,38 @@ public class Level3 extends GameLevel{
 
     /**
      * Stops the background music for the level.
+     * This method is responsible for stopping any ongoing background music
+     * that may be playing during the level.
      */
 
     public void stopMusic() {
-        if (gameMusicLevel3 != null) {
-            gameMusicLevel3.stop();
-        }
-
     }
+
+
+    /**
+     * Retrieves the statistics of the player (Warrior) for this level.
+     *
+     * @return A string containing the player's health, score, and coins.
+     */
 
     @Override
     public String getPlayerStats() {
-        // Implement the logic to get player stats for Level1
-        // For example:
-        return getWarriorStats();
+        Warrior warrior = getWarrior();
+        return "Health:" + warrior.getHealth() + ",Score:" + warrior.getScore() + ",Coins:" + warrior.getCoins();
     }
+
+
+    /**
+     * Sets the statistics of the player (Warrior) for this level.
+     *
+     * @param playerStats A string containing the player's health, score, and coins.
+     */
 
     @Override
     public void setPlayerStats(String playerStats) {
-        // Implement the logic to set player stats for Leve
+
         getWarrior().setPlayerStats(playerStats);
     }
-
 
 
 }

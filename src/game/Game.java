@@ -65,7 +65,7 @@ public class Game {
             System.out.println(e);
 
         }
-        currentLevel = new Level1(this, "Level 1");
+        currentLevel = new Level1(this, "Level1");
 
         MainMenu menu = new MainMenu(this);
         if (menu.IsPlayButtonPressed()) {
@@ -125,10 +125,11 @@ public class Game {
 
 
         try {
-            GameSaverLoader.save(currentLevel, "initial_game_state.txt");
+            GameSaverLoader.save(currentLevel, "save_game.txt");
         } catch (IOException ex) {
             System.out.println("Error saving initial game state: " + ex.getMessage());
         }
+
 
 
 
@@ -185,7 +186,7 @@ public class Game {
 
 
             try {
-                GameSaverLoader.save(currentLevel, "saved_game_state.txt");
+                GameSaverLoader.save(currentLevel, "save_game.txt");
             } catch (IOException ex) {
                 System.out.println("Error saving game state: " + ex.getMessage());
             }
@@ -223,7 +224,7 @@ public class Game {
             totalScore += oldWarrior.getScore();
 
 
-            currentLevel = new Level3(this, gameMusicLevel3);
+            currentLevel = new Level3(this,"Level3");
 
             try {
                 gameMusicLevel3 = new SoundClip("audio/ScaryMusic.wav");
@@ -263,7 +264,7 @@ public class Game {
             totalCoins += oldWarrior.getCoins();
             totalScore += oldWarrior.getScore();
 
-            currentLevel = new Level4(this);
+            currentLevel = new Level4(this, "Level4");
             Warrior newWarrior = currentLevel.getWarrior();
             newWarrior.setSpecial(oldWarrior.getSpecial());
 
@@ -349,15 +350,15 @@ public class Game {
 
         if (isPaused) {
             currentLevel.stop(); // Stop the game simulation if paused
-            if (gameMusic != null || gameMusicLevel3 !=null) {
-                gameMusic.pause();// Pause the game music
-                gameMusicLevel3.pause();
+            if (gameMusic != null ) {
+                gameMusic.pause();
+
             }
         } else {
-            currentLevel.start(); // Start or resume the game simulation if unpaused
-            if (gameMusic != null || gameMusicLevel3 !=null) {
+            currentLevel.start();
+            if (gameMusic != null) {
                 gameMusic.resume();
-                gameMusicLevel3.resume();// Resume the game music
+
             }
         }
     }

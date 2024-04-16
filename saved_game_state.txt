@@ -1,1 +1,1 @@
-Level1,Health:100,Score:0,Coins:0
+Level1,Health:100,Score:0,Coins:3

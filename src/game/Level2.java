@@ -26,7 +26,7 @@ public class Level2 extends GameLevel{
      * @param game The game object associated with this level.
      */
 
-    public Level2(Game game, String warriorStats){
+    public Level2(Game game, String playerStats){
         super(game);
 
 
@@ -196,10 +196,6 @@ public class Level2 extends GameLevel{
      * @return true if the key is collected, indicating level completion, else false,
      */
 
-    @Override
-    public String getLevelName() {
-        return "Level2";
-    }
 
     @Override
     public boolean isComplete() {
@@ -210,25 +206,49 @@ public class Level2 extends GameLevel{
 
     }
 
+
+    /**
+     * Returns the name of the current level.
+     *
+     * @return A string representing the name of the current level.
+     */
+    @Override
+    public String getLevelName() {
+        return "Level2";
+    }
+
     /**
      * Stops the background music for the level.
+     * This method is responsible for stopping any ongoing background music
+     * that may be playing during the level.
      */
     public void stopMusic() {
 
     }
 
 
+
+    /**
+     * Retrieves the statistics of the player (Warrior) for this level.
+     *
+     * @return A string containing the player's health, score, and coins.
+     */
     @Override
     public String getPlayerStats() {
-        // Implement the logic to get player stats for Level1
-        // For example:
-        return getWarriorStats();
+        Warrior warrior = getWarrior();
+
+        return "Health:" + warrior.getHealth() + ",Score:" + warrior.getScore() + ",Coins:" + warrior.getCoins();
     }
+
+
+    /**
+     * Sets the statistics of the player (Warrior) for this level.
+     *
+     * @param playerStats A string containing the player's health, score, and coins.
+     */
 
     @Override
     public void setPlayerStats(String playerStats) {
-        // Implement the logic to set player stats for Level1
-        // For example:
         getWarrior().setPlayerStats(playerStats);
     }
 
