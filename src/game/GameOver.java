@@ -74,8 +74,9 @@ public class GameOver extends ControlPanel {
             public void actionPerformed(ActionEvent e) {
                 // Set isPressed to true when the play button is pressed
                 isPressed = true;
-                game.startGame();
                 stopGameMusic();
+                game.disposeCurrentLevelFrame();
+                game.startGame();
                 ((JFrame) SwingUtilities.getWindowAncestor(content)).dispose();
 
             }
@@ -85,6 +86,8 @@ public class GameOver extends ControlPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Quit the game when the quit button is pressed
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(content);
+                currentFrame.dispose();
                 System.exit(0);
             }
         });
