@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * A Class GameView Represents the Graphical & Visual point of the Game
+ * A Class GameView Represents the Graphical and Visual display of the Game
  * Provides methods for rendering the game graphics.
  */
 

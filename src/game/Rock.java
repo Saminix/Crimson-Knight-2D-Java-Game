@@ -41,7 +41,8 @@ public class Rock extends Collectibles{
     }
     /**
      * Performs actions when the Rock is hit.
-     * If the Rock's health is <= 0, destroys the Rock.bye bye.
+     * If the Rock's health is Less than or Equal to 0,
+     * The Rock is Destroyed.
      */
     public void TakenHit() {
         if (getHealth() <= 0) {

@@ -176,7 +176,7 @@ public class Zombie extends Enemy implements StepListener {
 
     /**
      * Performs actions when the Zombie is hit.
-     * Plays the snarl sound and destroys the Zombie if its health is <= 0.
+     * Plays the snarl sound and destroys the Zombie if its health is less than or equal to 0.
      */
 
     @Override

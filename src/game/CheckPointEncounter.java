@@ -14,7 +14,7 @@ public class CheckPointEncounter  implements CollisionListener  {
     private GameLevel level;
     Game game;
     /**
-     * CheckpointEncounter class with specified GameLevel & Game
+     * CheckpointEncounter class with specified GameLevel and Game
      *
      * @param level The GameLevel Associated with the CheckPointEncounter.
      * @param game The Game Associated with the CheckPointEncounter.

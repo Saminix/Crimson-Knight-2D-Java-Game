@@ -150,7 +150,7 @@ public class PumpkinMan extends Enemy implements StepListener {
     
     /**
      * Performs actions when the PumpkinMan is hit.
-     * Plays the snarl sound and destroys the PumpkinMan if its health is <= 0.
+     * Plays the snarl sound and destroys the PumpkinMan if its health is less than or equal to 0.
      */
 
     @Override

@@ -156,7 +156,7 @@ public class Skeleton extends Enemy implements StepListener {
 
     /**
      * Performs actions when the Skeleton is hit.
-     * Plays the snarl sound and destroys the Skeleton if its health is <= 0.
+     * Plays the snarl sound and destroys the Skeleton if its health is less than or equal to 0.
      */
     
     @Override
