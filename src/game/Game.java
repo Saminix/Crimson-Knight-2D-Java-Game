@@ -61,10 +61,13 @@ public class Game {
 
         try {
             gameMusic = new SoundClip("audio/GameMusic.wav");
+            gameMusicLevel3 = new SoundClip("audio/ScaryMusic.wav");
         } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
             System.out.println(e);
 
         }
+
+
         currentLevel = new Level1(this, "Level1");
 
         MainMenu menu = new MainMenu(this);
@@ -114,10 +117,9 @@ public class Game {
         final JFrame frame = new JFrame("Crimson Ghost");
         frame.add(view);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationByPlatform(true);
-        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.pack();
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true);
 
         ControlPanel controlPanel = new ControlPanel(this);
@@ -216,6 +218,7 @@ public class Game {
         } else if (currentLevel instanceof Level2) {
             System.out.println("Level 3 Initiated");
             stopGameMusic();
+            playGameMusic3();
             currentLevel.stop();
             Warrior oldWarrior = currentLevel.getWarrior();
 
@@ -224,15 +227,11 @@ public class Game {
             totalScore += oldWarrior.getScore();
 
 
+
+
             currentLevel = new Level3(this,"Level3");
 
-            try {
-                gameMusicLevel3 = new SoundClip("audio/ScaryMusic.wav");
-                gameMusicLevel3.setVolume(0.3);
-                gameMusicLevel3.loop();
-            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                System.out.println(e);
-            }
+
 
             Warrior newWarrior = currentLevel.getWarrior();
             newWarrior.setSpecial(oldWarrior.getSpecial());
@@ -362,6 +361,16 @@ public class Game {
             }
         }
     }
+
+
+    public void stopGameMusic3(){
+        gameMusicLevel3.stop();
+    }
+
+    public void playGameMusic3(){
+        gameMusicLevel3.loop();
+    }
+
 
 
     public void setLevel(GameLevel level) {

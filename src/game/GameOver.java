@@ -75,6 +75,8 @@ public class GameOver extends ControlPanel {
                 // Set isPressed to true when the play button is pressed
                 isPressed = true;
                 stopGameMusic();
+                game.stopGameMusic();
+                game.stopGameMusic3();
                 game.disposeCurrentLevelFrame();
                 game.startGame();
                 ((JFrame) SwingUtilities.getWindowAncestor(content)).dispose();

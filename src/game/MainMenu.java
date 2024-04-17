@@ -111,7 +111,7 @@ public class MainMenu extends ControlPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 isControlsPressed = true;
-                JOptionPane.showMessageDialog(content, "Controls: \n W - Jump \n A - Left \n D - Right \n Mouse click - Shoot");
+                JOptionPane.showMessageDialog(content, "Controls: \n Press W - Jump \n Hold W - Double Jump \n Hold A - Run Left \n Hold D - Run Right \n Mouse click - Shoot");
             }
         });
         howToPlayButton.addActionListener(new ActionListener() {
